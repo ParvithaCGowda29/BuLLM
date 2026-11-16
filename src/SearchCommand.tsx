@@ -2,18 +2,16 @@ import {useEffect,useMemo,useRef,useState} from 'react';
 import {Command} from 'cmdk';
 import type {RecordRow} from './provider';
 import {IconSearch} from './icons';
-import {ADMIN_SHEETS} from './admin';
-import {loadRows} from './provider';
 
 type SheetMeta={name:string;headers:string[]};
 
-type Props={active:string;sheet:SheetMeta;rows:RecordRow[];query:string;onQuery:(q:string)=>void;globalOpen:boolean;onGlobalClose:()=>void;onJump:(section:string,title:string)=>void};
+type Props={active:string;sheet:SheetMeta;rows:RecordRow[];query:string;onQuery:(q:string)=>void};
 
 const matchesRow=(row:RecordRow,words:string[])=>words.every(w=>row.values.some(v=>v.toLowerCase().includes(w)));
 
 // cmdk search panel anchored to the toolbar search field: chips, browse-by-field and grouped
 // matches drive the existing table filter; the grid stays visible behind the panel.
-export function SearchCommand({active,sheet,rows,query,onQuery,globalOpen,onGlobalClose,onJump}:Props){
+export function SearchCommand({active,sheet,rows,query,onQuery}:Props){
  const[open,setOpen]=useState(false);
  const[field,setField]=useState<number|null>(null);
  const wrap=useRef<HTMLDivElement>(null);
@@ -43,40 +41,6 @@ export function SearchCommand({active,sheet,rows,query,onQuery,globalOpen,onGlob
  const words=query.trim().toLowerCase().split(/\s+/).filter(Boolean);
  const matches=useMemo(()=>words.length?rows.filter(r=>matchesRow(r,words)).slice(0,8):[],[rows,query,words.length]);
  const pick=(value:string)=>{onQuery(value);setOpen(false);setField(null)};
- // Global palette (opened with Ctrl+K): search every section, jump straight to the row.
- const[gQuery,setGQuery]=useState('');
- useEffect(()=>{if(globalOpen)setGQuery('')},[globalOpen]);
- const gResults=useMemo(()=>{
-  if(!globalOpen)return[] as {section:string;title:string;meta:string;isSection:boolean}[];
-  const ws=gQuery.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  if(!ws.length)return[] as {section:string;title:string;meta:string;isSection:boolean}[];
-  const out:{section:string;title:string;meta:string;isSection:boolean}[]=[];
-  for(const s of ADMIN_SHEETS){
-   if(ws.every((w:string)=>s.name.toLowerCase().includes(w)))out.push({section:s.name,title:s.name,meta:'Go to section',isSection:true});
-   for(const r of loadRows(s.name)){
-    if(out.length>=12)break;
-    if(matchesRow(r,ws)){
-     const title=(r.values[1]||r.values[0]||r.id).trim();
-     out.push({section:s.name,title,meta:(r.values[0]||'').trim(),isSection:false});
-    }
-   }
-   if(out.length>=12)break;
-  }
-  return out;
- },[globalOpen,gQuery]);
- const gSections=useMemo(()=>[...new Set(gResults.map(r=>r.section))],[gResults]);
- const globalPalette=globalOpen&&<div className="global-overlay" onMouseDown={onGlobalClose}>
-  <div className="global-palette" onMouseDown={e=>e.stopPropagation()}>
-   <Command shouldFilter={false} label="Search all Admin sections">
-    <Command.Input autoFocus value={gQuery} onValueChange={setGQuery} onKeyDown={e=>{if(e.key==='Escape')onGlobalClose()}} placeholder="Search every section - settings, users, models..." aria-label="Search all sections"/>
-    <Command.List className="global-list">
-     {gQuery.trim()!==''&&gResults.length===0&&<div className="global-empty">No matches in any section - try different words.</div>}
-     {gSections.map(sec=><Command.Group key={sec} heading={sec}>{gResults.filter(r=>r.section===sec).map(r=><Command.Item key={sec+':'+r.title} value={sec+':'+r.title} className="global-item" onSelect={()=>{onJump(r.section,r.isSection?'':r.title);onGlobalClose()}}><span className="search-item-title">{r.title}</span><small>{r.meta}</small></Command.Item>)}</Command.Group>)}
-    </Command.List>
-    <div className="global-foot">↑ ↓ Navigate · Enter Jump to row · Esc Close</div>
-   </Command>
-  </div>
- </div>;
  return <>
  <div className="search-cmd" ref={wrap}>
   <Command shouldFilter={false} label={`Search ${active}`}>
@@ -103,6 +67,6 @@ export function SearchCommand({active,sheet,rows,query,onQuery,globalOpen,onGlob
    </Command.List>}
   </Command>
  </div>
- {globalPalette}
+
  </>
 }
