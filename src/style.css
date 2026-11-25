@@ -571,3 +571,8 @@ button.skill-chip-link:hover{border-color:#c5d0e1;background:#e6f2fa}
 .bulk-body{padding:12px 24px}
 .ex-dialog{max-height:calc(100vh - 20px)}
 .ex-dialog .bulk-body{max-height:calc(100vh - 196px)}
+
+.rule-status{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.rule-status-proposed{background:#fff4dd;color:#9a6a00}.rule-status-active{background:#e4f3ea;color:#1b7a4a}.rule-status-draft{background:#eaf0f9;color:#55667f}.rule-status-archived{background:#eee;color:#666}.rule-status-other{background:#eaf0f9;color:#55667f}
+:root[data-theme=dark] .rule-status-proposed{background:#3a3320;color:#f0cf7a}:root[data-theme=dark] .rule-status-active{background:rgba(76,195,138,.15);color:#c2f1d3}:root[data-theme=dark] .rule-status-draft,:root[data-theme=dark] .rule-status-archived,:root[data-theme=dark] .rule-status-other{background:#1c2e51;color:#93a6c2}
+.rule-owner{color:#55667f;font-size:13px}:root[data-theme=dark] .rule-owner{color:#93a6c2}
