@@ -3,8 +3,7 @@ import Uppy from '@uppy/core';
 import Dashboard from '@uppy/react/dashboard';
 import '@uppy/core/css/style.min.css';
 import '@uppy/dashboard/css/style.min.css';
-import {IconFolder,IconUpload,IconArchive,IconStack2} from './icons';
-import {OnyxSettings} from './OnyxSettings';
+import {IconFolder,IconUpload,IconArchive} from './icons';
 import {loadOnyxConfig,uploadToOnyx,type OnyxConfig} from './onyx';
 import {unzipSync} from 'fflate';
 import {autoMap,detectHeader,importDataRows,mappedRows,readImportFile,sheetKey,templateInRows,type ImportSheet,type MasterTarget} from './bulkImport';
@@ -78,7 +77,6 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
  // index at the fetch step (docs like drawings/SOPs/emails become tickable then).
  const[onyxCfg,setOnyxCfg]=useState<OnyxConfig|null>(()=>loadOnyxConfig());
  const[onyxConnected,setOnyxConnected]=useState(false);
- const[onyxOpen,setOnyxOpen]=useState(false);
  const[onyxResult,setOnyxResult]=useState<{sent:string[];failed:string[]}|null>(null);
 
  const stepIndex=STEPS.findIndex(s=>s.key===step);
@@ -272,29 +270,7 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
     <input ref={fileInput} type="file" hidden multiple accept=".xlsx,.csv,.pdf,.dxf,.dwg,.step,.stp,.docx,.md,.txt,.eml,.msg" aria-label="Choose files from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
     <input ref={zipInput} type="file" hidden accept=".zip" aria-label="Choose a zip file from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
     <input ref={folderInput} type="file" hidden multiple {...({webkitdirectory:'',directory:''} as object)} aria-label="Choose a folder from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
-    <p className="ex-label">OR EXTRACT FROM A SOURCE</p>
-    <div className="ex-sources">
-     <button type="button" className="ex-source" onClick={()=>setOnyxOpen(true)}>
-      <span className="ex-icon" aria-hidden="true"><IconStack2 size={15}/></span>
-      <strong>Onyx</strong>
-      <small>{onyxCfg&&onyxConnected?`Linked to ${(()=>{try{return new URL(onyxCfg.url).host}catch{return 'your Onyx server'}})()}. Files you tick are sent to Onyx to read and index.`:onyxCfg?'Connection saved. Open to test or update it.':'Connect your Onyx server so it reads and indexes the picked files.'}</small>
-      <span className={'ex-badge'+(onyxCfg&&onyxConnected?'':' off')}>{onyxCfg&&onyxConnected?'Connected':'Not connected'}</span>
-     </button>
-     <button type="button" className="ex-source" disabled title="SharePoint needs company sign-in and a backend service, which this app doesn't have yet">
-      <span className="ex-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.7 1.6A4 4 0 0 0 6 19z"/></svg></span>
-      <strong>SharePoint</strong>
-      <small>Not connected. Company sign-in and a backend service are needed first.</small>
-      <span className="ex-badge off">Not connected</span>
-     </button>
-     <button type="button" className="ex-source" disabled title="Google Drive needs sign-in and a backend service, which this app doesn't have yet">
-      <span className="ex-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.7 1.6A4 4 0 0 0 6 19z"/></svg></span>
-      <strong>Google Drive</strong>
-      <small>Not connected. Sign-in and a backend service are needed first.</small>
-      <span className="ex-badge off">Not connected</span>
-     </button>
-    </div>
     {pickError&&<p role="alert" className="bulk-error">{pickError}</p>}
-    <p className="ex-note">Extraction never reads more than the files you choose. You pick exactly which files on the next step, everything is processed in this browser only, and nothing is imported until you confirm.</p>
    </>}
    {step==='permission'&&<>
     {pickError&&<p role="alert" className="bulk-error">{pickError}</p>}
@@ -430,6 +406,5 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
    </div>
   </div>}
  </dialog>
- {onyxOpen&&<OnyxSettings config={onyxCfg} onClose={()=>setOnyxOpen(false)} onSaved={(config,connected)=>{setOnyxCfg(config);setOnyxConnected(connected);setOnyxOpen(false);}}/>}
  </>;
 }
