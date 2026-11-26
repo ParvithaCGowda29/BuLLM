@@ -288,12 +288,12 @@ export function SkillGrid({ rows, setRows, editable, showChanges, onLockedEdit }
 
   return (
     <>
-    <div className="col-jump" role="toolbar" aria-label="Jump to an ISATVON column">
+    <div className="col-jump" role="toolbar" aria-label="Jump to an ISATVON column" data-tour="grid-cols">
       <span className="muted xs">Columns</span>
       {ISATVON.map(c => <button key={c.key} className="col-chip" onClick={() => jump(c.key)} title={`Scroll to ${c.letter} · ${c.label}`}><strong>{c.letter}</strong> {c.label}</button>)}
       <span className="muted xs scroll-hint"><Icon name="chevron" size={10} />Scroll the grid sideways, or open a row for all seven fields</span>
     </div>
-    <div className="grid-wrap" ref={wrap}>
+    <div className="grid-wrap" ref={wrap} data-tour="grid-table">
       <AgGridReact<Row>
         theme={gridTheme} rowData={data} columnDefs={columns} context={context}
         getRowId={getRowId} isFullWidthRow={isFullWidthRow} fullWidthCellRenderer={FullWidthCell} getRowHeight={getRowHeight}
@@ -385,7 +385,7 @@ export function Center({ snap, info }: StepProps) {
   else if (extracting || (!rows.length && (isLoading || loadedRev !== snap.skillsRevision))) body = <><Banner tone="info" icon="spinner">Extracting agents and their skills from the approved SOW. Rows appear when the spreadsheet update finishes.</Banner><GridSkeleton /></>
   else if (!rows.length) body = <Empty icon="file" title="No skills extracted">Skills come from the extraction run that starts when the SOW is approved in 3.1.</Empty>
   else body = <>
-    <div className="editor-bar grid-bar">
+    <div className="editor-bar grid-bar" data-tour="grid-tools">
       <label className="switch" title="Colour-code edits against the extracted values">
         <input type="checkbox" role="switch" checked={showChanges} onChange={e => setShowChanges(e.target.checked)} />
         <span className="switch-track" aria-hidden><span /></span>Changes
@@ -414,7 +414,7 @@ export function Center({ snap, info }: StepProps) {
         <div className="foot-info">
           <span className="muted sm kbd-hint">Double-click a cell or start typing to edit in place · Tab/Enter saves · Esc cancels · Enter on Skill expands · Shift+Enter shows SOW passage · Ctrl+Z undoes</span>
         </div>
-        <div className="row">
+        <div className="row" data-tour="grid-approve">
           <GateButton action="generate" {...tips('3.2', 'Approve')} reason={generateReason} busy={busy === 'Generate contract' || busy === 'Mark reviewed'} successKey={snap.workflow?.runId} onClick={startGenerate}>Approve</GateButton>
         </div>
       </>}>

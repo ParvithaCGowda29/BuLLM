@@ -156,7 +156,7 @@ function AddFilesMenu({ closed, cue, hint }: { closed: boolean; cue?: boolean; h
   }
   return (
     <div className="up-add-wrap">
-      <button ref={btn} className={`btn ${cue ? 'btn-primary up-add-cue' : 'btn-outline'} up-add`} aria-haspopup="menu" aria-expanded={open} aria-controls="up-add-menu"
+      <button ref={btn} data-tour="add-files" className={`btn ${cue ? 'btn-primary up-add-cue' : 'btn-outline'} up-add`} aria-haspopup="menu" aria-expanded={open} aria-controls="up-add-menu"
         aria-disabled={closed || undefined} aria-describedby={hint} disabled={closed} onClick={() => setOpen(o => !o)}><Icon name="plus" size={14} />Add files</button>
       {open && <div ref={menu} id="up-add-menu" className="up-add-menu" role="menu" aria-label="Add files" onKeyDown={onKey}>
         {OPTIONS.map(o => <button key={o.mode} role="menuitem" className="up-add-item" onClick={() => { close(); setModal(o.mode) }}><Icon name={o.icon} size={16} />{o.label}</button>)}
@@ -202,7 +202,7 @@ export function UploadDropZone({ snap }: { snap: Snapshot }) {
   const drag = useDragging()
   const closed = !snap.steps[0].editable
   return <>
-    <div className={`up-drop ${drag && !closed ? 'on' : ''}`} role="button" tabIndex={closed ? -1 : 0} aria-disabled={closed || undefined}
+    <div data-tour="up-drop" className={`up-drop ${drag && !closed ? 'on' : ''}`} role="button" tabIndex={closed ? -1 : 0} aria-disabled={closed || undefined}
       aria-label="Drop more files here or browse" {...dropTarget(closed)}
       onClick={() => { if (!closed) openPicker('files') }} onKeyDown={e => { if (!closed && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openPicker('files') } }}>
       <Icon name="cloud-up" size={20} />
@@ -308,7 +308,7 @@ export function UploadResults({ snap }: { snap: Snapshot }) {
       <h2 id="center-title" className="sr-only" tabIndex={-1}>Uploaded files</h2>
       {leaving && <UploadIdle leaving />}
       {/* Failures first, each with its reason always visible and its fix (29 Oct 2026). */}
-      {failed.length > 0 && <section className="up-attn" aria-labelledby="up-attn-h">
+      {failed.length > 0 && <section className="up-attn" aria-labelledby="up-attn-h" data-tour="up-attn">
         <div className="up-attn-head">
           <h3 id="up-attn-h" className="up-sec">Needs attention</h3>
           {/* Bulk Discard (17 Nov 2026, per user): discards every listed file, same as each card's Discard.
@@ -330,7 +330,7 @@ export function UploadResults({ snap }: { snap: Snapshot }) {
             </div>
           </div> })}
       </section>}
-      {rows.length > 0 && <div className="up-table-wrap">
+      {rows.length > 0 && <div className="up-table-wrap" data-tour="up-table">
         {failed.length > 0 && <h3 className="up-sec up-sec-in">Uploaded</h3>}
         <table className="table up-table">
           <colgroup><col style={{ width: '2.5em' }} /><col /><col className="up-col-type" /><col className="up-col-conf" /></colgroup>
@@ -353,9 +353,9 @@ export function UploadResults({ snap }: { snap: Snapshot }) {
       </div>}
       {all.length > 0 && <p className="up-status" role="status">{progress ? <UploadProgress {...progress} /> : busy ? 'Checking the uploaded files...' : `${rows.length} file${rows.length === 1 ? '' : 's'} uploaded${failed.length ? ',' : ''}`}
         {failed.length > 0 && <span className="tone-err"> {failed.length} failed</span>}</p>}
-      <section aria-labelledby="up-lanes"><h3 id="up-lanes" className="up-label">Source lanes</h3>
+      <section aria-labelledby="up-lanes" data-tour="up-lanes"><h3 id="up-lanes" className="up-label">Source lanes</h3>
         <ul className="up-lanes">{LANES.map(l => <li key={l}><strong>{rows.filter(r => r.kind.lane === l).length}</strong><span>{l}</span></li>)}</ul></section>
-      <section className="up-quota"><span>Space used <strong>{pctText}</strong> of engagement quota</span>
+      <section className="up-quota" data-tour="up-quota"><span>Space used <strong>{pctText}</strong> of engagement quota</span>
         <span className="up-bar" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="Space used"><span style={{ width: `${pct}%` }} /></span></section>
       {archived.length > 0 && <details className="up-archive">
         <summary><strong>Archive</strong><span className="dc-count">{archived.length}</span><Icon name="down" size={13} /></summary>
@@ -409,7 +409,7 @@ export function UploadMenu({ snap }: { snap: Snapshot }) {
     resetGoal()
   }, { step: 1 })
   return (
-    <span className="up-menu">
+    <span className="up-menu" data-tour="up-menu">
       <button className="icon-btn sm" aria-label="More actions" aria-haspopup="menu" aria-expanded={open} onClick={e => { e.stopPropagation(); setOpen(o => !o) }}><Icon name="tb-dots" size={16} /></button>
       {open && <div className="profile-menu up-menu-list" role="menu">
         <button className="profile-item" role="menuitem" disabled={locked || !!busy} onClick={() => setAsk(true)}><Icon name="refresh" size={14} />Reset</button>

@@ -331,7 +331,7 @@ function IdleOrb({ paused }: { paused?: boolean }) {
 
 /** Attachment cards, the rounded composer (+ · input · Dictate · Send / Stop), then the suggestion chips. */
 function Composer({ capture, chips }: { capture: boolean; chips: string[] }) {
-  return <div className="as-compose">
+  return <div className="as-compose" data-tour="composer">
     <AuiIf condition={s => s.composer.attachments.length > 0}>
       <div className="as-files"><ComposerPrimitive.Attachments components={{ Attachment: ChatFile }} /></div>
     </AuiIf>
@@ -345,7 +345,7 @@ function Composer({ capture, chips }: { capture: boolean; chips: string[] }) {
     </div>}
     <ComposerPrimitive.Root className="as-composer">
       <Tip text="Attach a file to ask about it">
-        <ComposerPrimitive.AddAttachment className="as-attach" aria-label="Attach a file to ask about it"><Icon name="tb-plus" size={18} /></ComposerPrimitive.AddAttachment>
+        <ComposerPrimitive.AddAttachment className="as-attach" aria-label="Attach a file to ask about it" data-tour="composer-attach"><Icon name="tb-plus" size={18} /></ComposerPrimitive.AddAttachment>
       </Tip>
       <label className="sr-only" htmlFor="as-input">{capture ? 'Intake objective' : 'Message the Enterprise Assistant'}</label>
       <div className="as-field">
@@ -354,7 +354,7 @@ function Composer({ capture, chips }: { capture: boolean; chips: string[] }) {
       </div>
       {dictation && <DictateControls />}
       <AuiIf condition={s => !s.thread.isRunning}>
-        <ComposerPrimitive.Send className="as-send" aria-label="Send message"><Icon name="tb-send" size={16} /></ComposerPrimitive.Send>
+        <ComposerPrimitive.Send className="as-send" aria-label="Send message" data-tour="composer-send"><Icon name="tb-send" size={16} /></ComposerPrimitive.Send>
       </AuiIf>
       <AuiIf condition={s => s.thread.isRunning}>
         <ComposerPrimitive.Cancel className="as-send as-stop" aria-label="Stop generating"><Icon name="tb-player-stop-filled" size={14} /></ComposerPrimitive.Cancel>
@@ -403,7 +403,7 @@ function DictateControls() {
     <span className="as-eq" aria-hidden>{[0, 1, 2, 3, 4].map(i => <i key={i} />)}</span>
   </ComposerPrimitive.StopDictation>
   // A blocked microphone returns the button to idle; the note under the composer says why (21 Oct 2026).
-  return <ComposerPrimitive.Dictate className="as-dictate" aria-label="Dictate" aria-describedby={d.blocked ? 'as-dict-note' : undefined} data-tip="Dictate">
+  return <ComposerPrimitive.Dictate className="as-dictate" aria-label="Dictate" aria-describedby={d.blocked ? 'as-dict-note' : undefined} data-tip="Dictate" data-tour="composer-mic">
     <Icon name="tb-microphone" size={16} /></ComposerPrimitive.Dictate>
 }
 /** While the microphone is requested the input says so; while listening, it shows "Listening... speak now" with the timer at its right edge (it covers the input, same box). */

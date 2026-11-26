@@ -63,7 +63,7 @@ function Center({ snap, part }: StepProps & { part: Part }) {
     <Pane id="center-title" kicker={P.kicker} title={P.title} className="center"
       actions={m && <span className="mono xs muted">manifest {m.version} · {shortHash(m.hash)}</span>}>
       {part === 'sandbox' && <>
-        <ul className="dc-list">
+        <ul className="dc-list" data-tour="val-list">
           {row('tb-box', 'Sandbox environment', sb ? `Isolated sandbox · ${sb.status}${sb.error ? `: ${sb.error}` : ''}` : 'Created for each run, isolated from BAM_db and Staging',
             !sb ? 'Not run' : running(sb) ? 'Running' : sb.status === 'succeeded' ? 'Complete' : sb.status === 'failed' ? 'Failed' : sb.status, sb?.status === 'succeeded' ? 'tone-ok' : sb?.status === 'failed' ? 'tone-err' : running(sb) ? 'tone-info' : undefined)}
           {row('tb-code', 'Artifact version', m ? `Current Translate output · ${m.version} · ${shortHash(m.hash)}` : 'No translated artifact yet',

@@ -109,7 +109,7 @@ function SowEditor({ sow, editable, info }: { sow: Sow; editable: boolean; info:
   return (
     <Pane id="center-title" kicker="SOW review and FDE approval" title="Scope" className="center"
       actions={<span className="row">
-        <label className="switch" title="Colour-code changes in the document">
+        <label className="switch" data-tour="sow-changes" title="Colour-code changes in the document">
           <input type="checkbox" role="switch" checked={showDiff} onChange={e => setShowDiff(e.target.checked)} />
           <span className="switch-track" aria-hidden><span /></span>Changes
         </label>
@@ -133,7 +133,7 @@ function SowEditor({ sow, editable, info }: { sow: Sow; editable: boolean; info:
           </span>
           {!approved && !decideReason && <span className="muted sm">Approving v{sow.version} unlocks the Grid and extracts skills from this exact version.</span>}
         </div>
-        <div className="row">
+        <div className="row" data-tour="sow-approve">
           {/* Reopened with a still-valid approval: Approve keeps it and closes the review (no second approval). */}
           {approved && info.editable
             ? <GateButton action="approve" {...tips('3.1', 'Approve')} reason={decideReason} busy={busy === 'Close SOW review'}
@@ -150,11 +150,11 @@ function SowEditor({ sow, editable, info }: { sow: Sow; editable: boolean; info:
       </div>
       <SowMeta sow={sow} />
       {showDiff && cmp.kind === 'none' && <Banner tone="info" icon="question"><strong>No comparison yet.</strong> {cmp.reason}</Banner>}
-      <div className="editor-bar">
+      <div className="editor-bar" data-tour="sow-toolbar">
         {editor && <Toolbar editor={editor} />}
         {showDiff && cmp.kind === 'diff' && <DiffLegend from={cmp.from} to={cmp.to} counts={diff.counts} />}
       </div>
-      <div className={`sow-doc ${editable ? 'editable' : 'readonly'} ${showDiff ? 'tracking' : ''}`}><EditorContent editor={editor} aria-label="SOW document" /></div>
+      <div className={`sow-doc ${editable ? 'editable' : 'readonly'} ${showDiff ? 'tracking' : ''}`} data-tour="sow-doc"><EditorContent editor={editor} aria-label="SOW document" /></div>
       <VisualsPanel />
     </Pane>
   )

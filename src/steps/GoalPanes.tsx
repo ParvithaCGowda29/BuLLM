@@ -152,7 +152,7 @@ export function GoalCapture() {
   return <div className={`goal${exit ? ' goal-exit' : ''}`}>
     <h3 className="goal-head">Name the agent and let the <img src={bull} alt="BuLLM" className="goal-bull" /> build it</h3>
     <p className="goal-lede">Type the goal. BuLL does the rest.</p>
-    <div className="goal-box" ref={boxRef}>
+    <div className="goal-box" ref={boxRef} data-tour="goal">
       {value === GOAL_PREFIX && <div className="goal-ghost" aria-hidden><span className="goal-ghost-pre">{GOAL_PREFIX}</span><span className="goal-ghost-tail">{example}</span></div>}
       <textarea ref={ta} className="goal-input" rows={1} value={value} aria-label="Agent goal"
         onChange={e => {
@@ -167,9 +167,9 @@ export function GoalCapture() {
           if (e.key === 'Backspace' && t.selectionStart <= PLEN && t.selectionEnd <= PLEN) { e.preventDefault(); return }
           if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send() }
         }} />
-      <ChromaticButton type="button" className="goal-send" aria-label="Send goal" aria-disabled={empty || undefined} disabled={empty} onClick={send}><Icon name="tb-arrow-right" size={18} /></ChromaticButton>
+      <ChromaticButton type="button" className="goal-send" data-tour="goal-send" aria-label="Send goal" aria-disabled={empty || undefined} disabled={empty} onClick={send}><Icon name="tb-arrow-right" size={18} /></ChromaticButton>
     </div>
-    <div className="goal-parts" role="group" aria-label="What, who and where in your goal">
+    <div className="goal-parts" role="group" aria-label="What, who and where in your goal" data-tour="goal-cards">
       {GOAL_PARTS.map((p, i) => { const span = spans[i]; const text = span ? value.slice(span[0], span[1]) : ''
         return <button type="button" key={p.label} className={`goal-part${span ? '' : ' goal-part-empty'}`}
           aria-label={text ? `${p.label}: ${text}. Highlight it in the goal.` : `${p.label} is not in the goal yet. Go to the end of the goal.`}
@@ -188,9 +188,9 @@ export function GoalExpansion() {
   const save = (k: typeof KEYS[number], v: string) => setGoal(s => s.draft && plain(s.draft.sections[k]) !== v.trim() ? { draft: { ...s.draft, sections: { ...s.draft.sections, [k]: esc(v.trim()) } } } : {})
   return <>
     <div className="as-urow"><div className="as-uline"><div className="as-msg as-user"><p>{text || draft.goal.what}</p></div></div></div>
-    <div className="as-arow"><span className="as-avatar" aria-hidden><img src={bull} alt="" /></span><div className="as-abody"><div className="as-msg as-bot goal-draft" key={draft.rev}>
+    <div className="as-arow"><span className="as-avatar" aria-hidden><img src={bull} alt="" /></span><div className="as-abody"><div className="as-msg as-bot goal-draft" key={draft.rev} data-tour="draft">
       <p className="goal-draft-title"><strong>{draft.title}</strong><span>{draft.subtitle}</span></p>
-      <dl className="goal-rows">{KEYS.map(k => <div key={k} className="goal-row"><dt><code>{k}</code>{SECTION[k]}</dt>
+      <dl className="goal-rows">{KEYS.map(k => <div key={k} className="goal-row" data-tour={`draft-${k.toLowerCase()}`}><dt><code>{k}</code>{SECTION[k]}</dt>
         <dd contentEditable suppressContentEditableWarning spellCheck role="textbox" aria-label={`${SECTION[k]} (editable)`}
           onBlur={e => save(k, e.currentTarget.innerText)}>{plain(draft.sections[k])}</dd></div>)}</dl>
       <p>Add your files on the left and I'll take it from there.</p>

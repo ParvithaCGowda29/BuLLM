@@ -110,7 +110,7 @@ export function StandardizeView({ snap }: { snap: Snapshot }) {
         </ul>
         <p className="muted xs">Supporting docs: {DOCS.map((d, i) => <span key={d}>{i > 0 && ' · '}{d} <span className="std-na">unavailable</span></span>)}</p>
       </section>
-      <section className="std-card" aria-labelledby="std-decide">
+      <section className="std-card" aria-labelledby="std-decide" data-tour="std-decide">
         <h3 id="std-decide">Decision &amp; remediation</h3>
         <div className="std-branches">
           <div><span className="dc-pill tone-ok">Yes</span><strong>Ready for Parse</strong><span className="muted xs">{n(['ready'])} file{n(['ready']) === 1 ? '' : 's'}</span></div>
@@ -119,7 +119,7 @@ export function StandardizeView({ snap }: { snap: Snapshot }) {
         </div>
       </section>
       {!list.length ? <p className="dc-none"><Icon name="tb-upload" size={16} />{snap.uploads.length ? 'Waiting for the uploads to be ready.' : 'No files yet. Add documents in Upload.'}</p> : (
-        <ul className="dc-list std-files" aria-label="Files">
+        <ul className="dc-list std-files" aria-label="Files" data-tour="std-files">
           {list.map(f => (
             <li key={f.u.id}>
               <Icon name={f.a.route === 'pdf-copy' ? 'tb-transform' : 'file'} size={15} />

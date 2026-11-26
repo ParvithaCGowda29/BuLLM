@@ -26,6 +26,7 @@ import { ragPipeline, useRag } from './rag/ragPipeline.ts'
 import { evidenceStatuses, previousRun } from './tracker/evidence.ts'
 import { useApprovals } from './lib/approvals'
 import { setTracker } from './tracker/useTrackerStore'
+import { useAutoWalkthrough, useOutputsWalkthrough, useScreenWalkthrough } from './walkthrough/tour'
 import { prerequisite } from './lib/prereq'
 import { getDrafts } from './lib/drafts'
 import { LoginPage } from './features/login/LoginPage'
@@ -153,6 +154,11 @@ function Workbench() {
     el.querySelectorAll('.pane-body, .rag').forEach(x => { x.scrollTop = 0 })
   }, [screen?.id, global])
   useTrackerEvidence(snap)
+  // First-run product tour: starts once per browser when the Upload screen is ready (? in the top bar replays it).
+  useAutoWalkthrough(!!snap && screen?.id === '1.1')
+  // Every screen (and Masters) has its own short tour the first time it opens; Upload's Outputs pane gets one when it appears.
+  useScreenWalkthrough(!!snap, screen?.id, !!global)
+  useOutputsWalkthrough(!!snap, screen?.id === '1.1')
   Step3.useRunHistory(snap)
   // Pane geometry never changes with the stage (21 Oct 2026, per user): only the person collapses or opens a pane.
   // Internal diagnostics (scan, quarantine, file detail) have no FDE role in this build: old URLs open Upload.
@@ -220,9 +226,9 @@ function Workbench() {
       <PaneLayout className="shell" data-screen={screen?.id} data-nav={shell.nav ? 'collapsed' : undefined} data-assist={shell.assistant ? 'collapsed' : undefined} data-drawer={drawer ?? undefined}>
         <div className="shell-slot slot-nav" data-layout-pane="nav"><NavRail snap={snap} /></div>
         {/* Mounted once for the session (never keyed by screen), so the conversation survives navigation. */}
-        <div className="shell-slot slot-assist" data-layout-pane="assistant"><AssistantPane snap={snap} screenId={screen?.id} locked={locked} /></div>
+        <div className="shell-slot slot-assist" data-layout-pane="assistant" data-tour="assistant"><AssistantPane snap={snap} screenId={screen?.id} locked={locked} /></div>
         {drawer && <button className="drawer-scrim" aria-label="Close panel" onClick={() => setUi({ drawer: null })} />}
-        <section data-layout-pane="workspace" className="shell-pane workspace" aria-labelledby="ws-title">
+        <section data-layout-pane="workspace" className="shell-pane workspace" aria-labelledby="ws-title" data-tour="workspace">
           <header {...paneHeaderProps} className="shell-head ws-head">
             {screen?.id === '1.1'
               ? <UploadHead snap={snap} />
@@ -231,7 +237,7 @@ function Workbench() {
           </header>
           <div className="ws-body" ref={wsBody}>{body}</div>
           {/* One primary action, pinned below the scrolling body (never scrolled to). */}
-          {foot && <footer className="ws-foot">{foot}</footer>}
+          {foot && <footer className="ws-foot" data-tour="action">{foot}</footer>}
         </section>
       </PaneLayout>
     </div>

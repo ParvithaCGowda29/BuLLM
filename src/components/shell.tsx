@@ -9,6 +9,7 @@ import { useStatuses } from '../tracker/useTrackerStore'
 import { signOut, switchToMasters, useSession } from '../features/login/session'
 import { AutoChip, HitlChip, Icon, Tip, fmtFull, fmtTime } from './ui'
 import { AppSettingsModal } from './AppSettingsModal'
+import { startMastersTour, startScreenTour, startWalkthrough } from '../walkthrough/tour'
 import { BrandLockup } from './BrandLockup'
 import { UploadFilesBlock } from '../steps/UploadPanes'
 
@@ -39,12 +40,12 @@ export function TopBar({ syncedAt, offline }: { snap?: Snapshot; syncedAt: numbe
         </nav>
       </div>
       <div className="topbar-right">
-        <span className={`sync ${offline ? 'tone-err' : 'tone-muted'}`} role="status" title={syncedAt ? `Last backend sync ${fmtFull(new Date(syncedAt).toISOString())}` : undefined}>
+        <span data-tour="sync" className={`sync ${offline ? 'tone-err' : 'tone-muted'}`} role="status" title={syncedAt ? `Last backend sync ${fmtFull(new Date(syncedAt).toISOString())}` : undefined}>
           <Icon name={offline ? 'alert' : 'db'} size={12} />
           <span className="sync-text">{offline ? `Backend unreachable. Status unknown since ${syncedAt ? fmtTime(new Date(syncedAt).toISOString()) : 'start'}` : `All changes saved · ${syncedAt ? fmtTime(new Date(syncedAt).toISOString()) : '—'}`}</span>
         </span>
         {/* Glass mode switch: native radios (Staging = left half, FDE = right half); the sphere sits over the inactive half. */}
-        <fieldset className="env-glass" data-env={env} aria-describedby="env-hint" title="View context, not a deploy">
+        <fieldset className="env-glass" data-env={env} aria-describedby="env-hint" title="View context, not a deploy" data-tour="env">
           <legend className="sr-only">Environment mode</legend>
           <span className="eg-track" aria-hidden />
           <span className="eg-sphere" aria-hidden>
@@ -62,7 +63,8 @@ export function TopBar({ syncedAt, offline }: { snap?: Snapshot; syncedAt: numbe
           ))}
         </fieldset>
         <span id="env-hint" className="sr-only">View context, not a deploy</span>
-        <button className="icon-btn" aria-pressed={theme === 'light'} onClick={() => setUi({ theme: theme === 'dark' ? 'light' : 'dark' })}
+        <button className="icon-btn" onClick={() => { if (global) startMastersTour(); else if (id) startScreenTour(id); else startWalkthrough() }} aria-label="Take a tour" title="Take a tour of this screen"><Icon name="question" /></button>
+        <button className="icon-btn" data-tour="theme" aria-pressed={theme === 'light'} onClick={() => setUi({ theme: theme === 'dark' ? 'light' : 'dark' })}
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
           <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
         </button>
@@ -88,7 +90,7 @@ function ProfileMenu() {
   }, [open])
   const close = () => { setOpen(false); btn.current?.focus() }
   return (
-    <div className="profile" ref={wrap} onKeyDown={e => { if (e.key === 'Escape' && open) close() }}>
+    <div className="profile" data-tour="profile" ref={wrap} onKeyDown={e => { if (e.key === 'Escape' && open) close() }}>
       <button ref={btn} className="icon-btn" aria-expanded={open} aria-controls="profile-menu" aria-label="Profile" title="Profile" onClick={() => setOpen(o => !o)}>
         <Icon name="user" />
       </button>
@@ -166,7 +168,7 @@ export function NavRail({ snap }: { snap?: Snapshot }) {
   }
 
   return (
-    <nav className="shell-pane navrail" aria-labelledby="nav-title">
+    <nav className="shell-pane navrail" aria-labelledby="nav-title" data-tour="nav">
       {/* Collapse control at the pane's far-left edge, before the title (17 Nov 2026, approved wireframes change 1). */}
       <header {...paneHeaderProps} className="shell-head">
         <button className="icon-btn sm" onClick={toggleRail} aria-expanded aria-label="Collapse navigation" title="Collapse"><Icon name="panel-left" size={14} /></button>
@@ -181,7 +183,7 @@ export function NavRail({ snap }: { snap?: Snapshot }) {
         <div className="nv-card">
           <strong className="nv-card-title">BAM pipeline</strong>
           <span className="muted xs">Track and manage your workflow</span>
-          <label className="nv-search">
+          <label className="nv-search" data-tour="nav-search">
             <Icon name="search" size={13} />
             <span className="sr-only">Search workflow steps</span>
             <input type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search workflow steps"
