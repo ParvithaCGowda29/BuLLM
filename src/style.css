@@ -761,3 +761,14 @@ textarea.rm-fv{resize:vertical}
 /* Sidebar draft badge next to the Rules count: always visible, orange, beats .nav-item small. */
 .nav-item small.navb{margin-left:0;background:#e4572e;color:#fff;border-radius:10px;min-width:0;padding:1px 6px;font-size:11px;font-weight:700;opacity:1}
 :root[data-theme=dark] .nav-item small.navb{background:#e4572e;color:#fff}
+/* Rules grid: keep both scrollbars inside the viewport. The grid box gets its own
+   bounded height with a sticky header, so the horizontal scrollbar is always visible
+   at the bottom of the grid instead of a page-scroll away. */
+.rm-scroll{overflow:auto;max-height:calc(100vh - 255px);min-height:240px;scrollbar-width:auto;scrollbar-color:#c5d0e1 #f5f8fd}
+.rm-scroll::-webkit-scrollbar{height:12px;width:12px}
+.rm-scroll::-webkit-scrollbar-thumb{background:#c5d0e1;border-radius:8px;border:2px solid #f5f8fd}
+.rm-scroll::-webkit-scrollbar-track,.rm-scroll::-webkit-scrollbar-corner{background:#f5f8fd}
+:root[data-theme=dark] .rm-scroll{scrollbar-color:#2e4a73 #142540}
+:root[data-theme=dark] .rm-scroll::-webkit-scrollbar-thumb{background:#2e4a73;border-color:#142540}
+:root[data-theme=dark] .rm-scroll::-webkit-scrollbar-track,:root[data-theme=dark] .rm-scroll::-webkit-scrollbar-corner{background:#142540}
+.rm-hd{position:sticky;top:0;z-index:2}
