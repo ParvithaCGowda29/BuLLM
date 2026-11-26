@@ -396,3 +396,4 @@
 
 /* Undo sits inline beside the toast text; only the dismiss x is absolutely placed. */
 .notice .undo{position:static}
+.account-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;border:1px solid #c5d0e1;border-radius:8px;background:#fff;color:#55667f}.account-btn:hover{background:#f2f9fd}.header-right .account-btn{margin-left:18px}:root[data-theme=dark] .account-btn{background:#101e32;border-color:#2e4a73;color:#93a6c2}:root[data-theme=dark] .account-btn:hover{background:#1a2e4d}@media(max-width:900px){.header-right .account-btn{margin-left:8px}}
