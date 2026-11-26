@@ -813,3 +813,26 @@ textarea.rm-fv{resize:vertical}
 :root[data-theme=dark] .af-btn-pri{background:#5b83f2;color:#fff;border-color:transparent}
 :root[data-theme=dark] .af-btn-pri:hover{background:#4a71e0}
 :root[data-theme=dark] .af-btn-sec{background:#1a2e4d;border-color:#2e4a73;color:#e6edf7}
+
+/* Add files dashboard: same Uppy chrome as BAM_UI's review step */
+.bm-uppy .uppy-Dashboard-inner{background:#F5F8FD;border:1px solid #DCE3EE;border-radius:12px}
+.bm-uppy .uppy-Dashboard-AddFiles{border-color:#C5D0E1}
+.bm-uppy .uppy-Dashboard-browse,.bm-uppy .uppy-DashboardContent-addMore{color:#006C99}
+.bm-uppy .uppy-Dashboard-browse:hover,.bm-uppy .uppy-DashboardContent-addMore:hover{border-bottom-color:#006C99}
+.bm-uppy .uppy-DashboardContent-bar{background:#FFFFFF;border-bottom:1px solid #DCE3EE;justify-content:flex-end}
+.bm-uppy .uppy-DashboardContent-back,.bm-uppy .uppy-DashboardContent-title{display:none}
+.bm-uppy .uppy-Dashboard-files{background:#F5F8FD}
+.bm-uppy .uppy-Dashboard-Item-name{color:#0F1B2D}
+.bm-uppy .uppy-Dashboard-Item-status,.bm-uppy .uppy-Dashboard-note{color:#55667F}
+.bm-uppy .uppy-Dashboard-Item-action--remove{color:#C23A37}
+.bm-uppy .uppy-Dashboard-dropFilesHereHint{border-color:#006C99;color:#006C99}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-inner{background:#142540;border-color:#22395C}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-AddFiles{border-color:#2E4A73}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-browse,:root[data-theme=dark] .bm-uppy .uppy-DashboardContent-addMore{color:#5B83F2}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-browse:hover,:root[data-theme=dark] .bm-uppy .uppy-DashboardContent-addMore:hover{border-bottom-color:#5B83F2}
+:root[data-theme=dark] .bm-uppy .uppy-DashboardContent-bar{background:#101E32;border-bottom-color:#22395C}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-files{background:#142540}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-Item-name{color:#E6EDF7}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-Item-status,:root[data-theme=dark] .bm-uppy .uppy-Dashboard-note{color:#93A6C2}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-Item-action--remove{color:#F2716E}
+:root[data-theme=dark] .bm-uppy .uppy-Dashboard-dropFilesHereHint{border-color:#5B83F2;color:#5B83F2}
