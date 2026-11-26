@@ -1,0 +1,4239 @@
+{
+ "readme": [
+  [
+   "BuLLM common masters",
+   "Marketing + Manufacturing",
+   "Private working catalog / 26 October 2026"
+  ],
+  [
+   "Layout",
+   "One table per master",
+   "Organization, Agents, Skills, Rules, Tools and Filetype each use the latest Marketing master's column headings exactly. Marketing and Manufacturing records sit together in one table per master, with no extra columns."
+  ],
+  [
+   "Hierarchy",
+   "Organization > Agents > Skills > Rules > Tools > Filetype",
+   "Reference direction only. Each master can map to one or multiple earlier masters."
+  ],
+  [
+   "Manufacturing records",
+   "Mapped into the Marketing columns",
+   "Manufacturing fields were placed in the closest Marketing column. Original Manufacturing fields are kept as JSON in the preserved-snapshot or evidence column where the master has one. Manufacturing IDs are prefixed MFG- (Organization uses the source code; Tools keeps TOOL-MFG-NN)."
+  ],
+  [
+   "Filetype",
+   "Untouched",
+   "Not edited in this pass."
+  ],
+  [
+   "Sources",
+   "Snapshot, not sync",
+   "Marketing: https://docs.google.com/spreadsheets/d/1nX3qDQAygIUI1j5xEv8-znJBplOUmjEXZTga_URcwwM/edit  Manufacturing: https://docs.google.com/spreadsheets/d/1zj1FHA9Tp6jw-pCFfBtOsSDW4xSRwRUb5lr8ZgUz90E/edit . Copied 26 Oct 2026; later source edits do not flow here. Manufacturing source is read only."
+  ],
+  [
+   "Earlier version",
+   "Hidden tabs",
+   "Superseded - Organization/Agents/Skills/Rules/Tools hold the previous common layout (with the Domain, key and provenance columns), hidden and not deleted."
+  ],
+  [
+   "Access",
+   "Private to sriniketh.s@digibull.ai",
+   "No collaborators or anyone-with-link permissions added."
+  ]
+ ],
+ "sheets": [
+  {
+   "name": "Organization",
+   "headers": [
+    "Org ID",
+    "Company / Type",
+    "Brand Properties",
+    "Location",
+    "Certifications",
+    "Company Segment / Niche / Offerings",
+    "Customers / Audience",
+    "Employees / Job Role",
+    "Data Sources",
+    "Systems / tools (Software)",
+    "Assets (Hardware)",
+    "FDE Notes",
+    "Documents",
+    "Artifacts"
+   ],
+   "descriptions": [
+    "Stable unit or resource ID",
+    "Company / business unit name and type (HQ, branch, department or resource)",
+    "Website / GBP / Social Media",
+    "Registered address",
+    "Company/business unit certifications. Certificate on the first line; Validity (dd-mm-yyyy) on the second line.",
+    "Company segment/niche, context and goal priorities; approved services / offers",
+    "ICP / customer segments as four stacked lines: Customers, Suppliers, Audience, Other. One label per line, content after it.",
+    "Named roles and approval owners",
+    "Governed document / source versions. One linked document per line, each opening its own file or sheet.",
+    "Software only. Feeder: BuLLM Tech Stack & Tool Factory > Repo Library. Store canonical repo / Tooling ID, version and tenant account refs; no credentials. See README feeder note. Reference mapping, not live sync.",
+    "Physical hardware only: asset ID, device/equipment type, assigned unit/owner and inventory/evidence ref. Legacy unclassified values retained pending review; not hardware verification.",
+    "Changes, exceptions and open gaps"
+   ],
+   "rows": [
+    {
+     "id": "Organization-2",
+     "values": [
+      "ORG-HQ-01",
+      "Innotech Integration Services Pvt. Ltd. - HQ (co-located with Unit I)",
+      "Website: i-ispl.com; GBP: Google Maps card; LinkedIn: company page",
+      "Unit I address: 3rd Floor, #1A, Rukmini Plaza, Madhuvana Layout, Srirampura Main Road, Srirampura, Mysuru, Karnataka 570023.",
+      "ISO 9001:2015; certificate reference and validity not available in the supplied source.",
+      "Segment / niche: mid-market B2B operations buyers; Offerings: Application integration, box build and cable assembly",
+      "Link",
+      "14 cross-unit employees (Both Units) - full roster in 'Employees - Innotech' tab",
+      "https://i-ispl.com/quality/;",
+      "Link",
+      "Link",
+      "GSTIN 29AADCO3042N1Z6; TAN unverified",
+      "",
+      ""
+     ],
+     "sourceRow": 2
+    },
+    {
+     "id": "Organization-3",
+     "values": [
+      "ORG-BU-01",
+      "Innotech Integration Services Pvt. Ltd. - Unit I - Box Build",
+      "Website: i-ispl.com; GBP: Google Maps card; LinkedIn: company page",
+      "Unit I address: 3rd Floor, #1A, Rukmini Plaza, Madhuvana Layout, Srirampura Main Road, Srirampura, Mysuru, Karnataka 570023.",
+      "ISO 9001:2015; certificate reference and validity not available in the supplied source.",
+      "Segment / niche: services campaign ICP; Offerings: Box build assembly and testing",
+      "Link",
+      "7 Unit I-specific employees (+ shared Both Units roster) - full roster in 'Employees - Innotech' tab",
+      "https://i-ispl.com/quality/;",
+      "Link",
+      "Link",
+      "GSTIN 29AADCO3042N1Z6; TAN unverified",
+      "",
+      ""
+     ],
+     "sourceRow": 3
+    },
+    {
+     "id": "Organization-4",
+     "values": [
+      "ORG-BU-02",
+      "Innotech Integration Services Pvt. Ltd. - Unit II - Cable Assembly",
+      "Website: i-ispl.com; GBP: Google Maps card; LinkedIn: company page",
+      "64 E-2, Hootagalli Industrial Area, Plot No.64, E-1, Mysuru, Anagahalli, Karnataka 570018",
+      "ISO 9001:2015; certificate reference and validity not available in the supplied source.",
+      "Segment / niche: Samples / references / tech stack; Offerings: Masters README",
+      "Link",
+      "6 Unit II-specific employees (+ shared Both Units roster) - full roster in 'Employees - Innotech' tab",
+      "https://i-ispl.com/quality/;",
+      "Link",
+      "Link",
+      "GSTIN 29AADCO3042N1Z6; TAN unverified",
+      "",
+      ""
+     ],
+     "sourceRow": 4
+    }
+   ],
+   "removedRows": [],
+   "notes": [],
+   "readOnly": false
+  },
+  {
+   "name": "Agents",
+   "headers": [
+    "Agent ID",
+    "Agent Name",
+    "Kind",
+    "Type",
+    "Reference",
+    "Source",
+    "Tools",
+    "Model"
+   ],
+   "descriptions": [
+    "Stable agent or assistant ID",
+    "Agent or assistant name and what it does",
+    "Agent: one defined job. Assistant: a cross-cutting helper across masters.",
+    "Proposed agent (to be built) / Internal agent (already in the company) / Third-party or external agent",
+    "Proposed agents only: the existing agent this one enhances or integrates. Assistants: what they cut across.",
+    "Built in BuLLM, or Imported from another path (GitHub, MCP server, company path). The Imported tag shows on row hover.",
+    "Tools the agent or assistant uses, pulled from the Tool Factory",
+    "Model the agent or assistant runs on"
+   ],
+   "rows": [
+    {
+     "id": "Agents-2",
+     "values": [
+      "AG-01",
+      "RFQ Intake Agent",
+      "Agent",
+      "Internal",
+      "",
+      "Built in BuLLM",
+      "Email parser; LLM",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 2
+    },
+    {
+     "id": "Agents-3",
+     "values": [
+      "AG-02",
+      "Costing Agent",
+      "Agent",
+      "Internal",
+      "",
+      "Built in BuLLM",
+      "Costing engine",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 3
+    },
+    {
+     "id": "Agents-4",
+     "values": [
+      "AG-03",
+      "Supplier Lookup Agent",
+      "Agent",
+      "Third-party",
+      "",
+      "Imported · GitHub",
+      "Search API; Match DB",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 4
+    },
+    {
+     "id": "Agents-5",
+     "values": [
+      "AG-04",
+      "Drawing OCR Agent",
+      "Agent",
+      "Third-party",
+      "",
+      "Imported · MCP server",
+      "OCR engine",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 5
+    },
+    {
+     "id": "Agents-6",
+     "values": [
+      "AG-05",
+      "Smart Quote Reviewer",
+      "Agent",
+      "Proposed",
+      "Enhances: AG-02 · Costing Agent",
+      "Built in BuLLM",
+      "LLM; Rules check",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 6
+    },
+    {
+     "id": "Agents-7",
+     "values": [
+      "AS-01",
+      "Quote Prep Assistant",
+      "Assistant",
+      "Internal",
+      "Cross-cutting: Quotes, RFQs",
+      "Built in BuLLM",
+      "LLM; Email parser",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 7
+    },
+    {
+     "id": "Agents-8",
+     "values": [
+      "AS-02",
+      "Meeting Notes Assistant",
+      "Assistant",
+      "Internal",
+      "Cross-cutting: All masters",
+      "Built in BuLLM",
+      "LLM; Transcription",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 8
+    },
+    {
+     "id": "Agents-9",
+     "values": [
+      "AS-03",
+      "Data Cleanup Assistant",
+      "Assistant",
+      "Internal",
+      "Cross-cutting: All masters",
+      "Built in BuLLM",
+      "LLM; Dedup",
+      "Claude Sonnet 4.5"
+     ],
+     "sourceRow": 9
+    }
+   ],
+   "removedRows": [],
+   "notes": [],
+   "readOnly": false
+  },
+  {
+   "name": "Skills",
+   "headers": [
+    "Skill ID",
+    "Skill",
+    "I · Instruction",
+    "S · Source data",
+    "A · Automation",
+    "T · Tech stack",
+    "V · Variables",
+    "O · Outcome",
+    "N · Next",
+    "References"
+   ],
+   "descriptions": [
+    "Stable skill key, assigned automatically when the row is added; not editable",
+    "Skill name",
+    "Instruction: what the skill does, step by step",
+    "Source data: the inputs the skill reads",
+    "Automation: when the skill runs - schedule or trigger",
+    "Tech stack: the APIs, models and tools the skill runs on",
+    "Variables: the values the skill captures and passes on",
+    "Outcome: what the skill produces",
+    "Next: the skill or step that runs next",
+    "Linked Organisations (blue chips) and Tool Factory entries (grey TF chips). Rules live inside Organisations."
+   ],
+   "rows": [
+    {
+     "id": "Skills-2",
+     "values": [
+      "SK-01",
+      "RFQ Intake",
+      "Parse email; Extract line items; Map to masters",
+      "Shared RFQ inbox",
+      "Trigger · new mail",
+      "Email parser; LLM",
+      "Customer, parts, due date",
+      "Structured RFQ record",
+      "SK-02 Drawing OCR",
+      "Innotech HQ; TF-01 Claude Code; TF-29 pdf"
+     ],
+     "sourceRow": 2
+    },
+    {
+     "id": "Skills-3",
+     "values": [
+      "SK-02",
+      "Drawing OCR",
+      "Detect tables; Read dimensions; Extract tolerances",
+      "Part drawings (PDF, DXF)",
+      "On demand",
+      "OCR engine",
+      "Dimensions, tolerances",
+      "Dimension table",
+      "SK-03 Costing",
+      "Innotech Unit I; TF-19 PaddleOCR; TF-25 ezdxf"
+     ],
+     "sourceRow": 3
+    },
+    {
+     "id": "Skills-4",
+     "values": [
+      "SK-03",
+      "Costing",
+      "Material lookup; Machine hour rate; Overheads; Margin",
+      "SK-02 dimension table; Masters rates",
+      "On demand",
+      "Costing engine",
+      "Unit cost breakdown",
+      "Costed part summary",
+      "SK-08 Quote Assembly",
+      "Innotech Unit I; TF-30 xlsx"
+     ],
+     "sourceRow": 4
+    },
+    {
+     "id": "Skills-5",
+     "values": [
+      "SK-04",
+      "Supplier Lookup",
+      "Match commodity; Rank suppliers; Check certs",
+      "Approved supplier list",
+      "On demand",
+      "Search API; Match DB",
+      "Supplier shortlist + certs",
+      "Ranked supplier list",
+      "SK-03 Costing",
+      "Innotech HQ; TF-35 Exa; TF-12 Postgres MCP Pro"
+     ],
+     "sourceRow": 5
+    },
+    {
+     "id": "Skills-6",
+     "values": [
+      "SK-05",
+      "PFD Builder",
+      "List operations; Sequence flow; Link controls",
+      "SK-02 dimension table; Part drawings",
+      "On demand",
+      "LLM",
+      "Operation sequence",
+      "Process flow diagram",
+      "SK-06 PFMEA",
+      "Innotech Unit I; TF-01 Claude Code"
+     ],
+     "sourceRow": 6
+    },
+    {
+     "id": "Skills-7",
+     "values": [
+      "SK-06",
+      "PFMEA",
+      "Identify failure modes; Score RPN; Recommend actions",
+      "SK-05 process flow",
+      "On demand",
+      "LLM; Rules check",
+      "RPN scores + actions",
+      "PFMEA sheet",
+      "SK-07 Control Plan",
+      "Innotech Unit I; TF-01 Claude Code; TF-30 xlsx"
+     ],
+     "sourceRow": 7
+    },
+    {
+     "id": "Skills-8",
+     "values": [
+      "SK-07",
+      "Control Plan",
+      "Map characteristics; Set checks; Sampling plan",
+      "SK-06 PFMEA sheet",
+      "On demand",
+      "LLM",
+      "Control items + sampling",
+      "Control plan",
+      "SK-08 Quote Assembly",
+      "Innotech Unit I; TF-01 Claude Code"
+     ],
+     "sourceRow": 8
+    },
+    {
+     "id": "Skills-9",
+     "values": [
+      "SK-08",
+      "Quote Assembly",
+      "Pull costing; Apply margin; Draft quote",
+      "SK-03 costing summary",
+      "On approval",
+      "LLM; Costing engine",
+      "Quote draft + pricing",
+      "Customer quote (PDF)",
+      "Manager approval",
+      "Innotech HQ; TF-21 Stirling-PDF"
+     ],
+     "sourceRow": 9
+    }
+   ],
+   "removedRows": [],
+   "notes": [],
+   "readOnly": false
+  },
+  {
+   "name": "Rules",
+   "headers": [
+    "Rule ID",
+    "Rule / Type / Description",
+    "Source / approval / evidence",
+    "Org / Skills mapping + enforcement / gate",
+    "Stop / review condition",
+    "Owner / version",
+    "Status",
+    "Effective / expiry",
+    "Skill ref"
+   ],
+   "descriptions": [
+    "Stable rule key; one rule per row.",
+    "Name, type and short definition. Types: Policy, Prompt, Estimation, Calculation, Validation, Decision/routing.",
+    "Source/version, approval and evidence reference; preserve source context.",
+    "Org IDs + Skill IDs are joins to the live tabs. Mapping marked proposed is not approved applicability. State inputs, runtime point and required check together.",
+    "What happens on failure, missing data or conflict.",
+    "Accountable owner + rule version; confirmed before activation.",
+    "Proposed is not approved or implemented. Test cases are not executed tests.",
+    "Start / expiry / review date; dates are required before activation.",
+    "Skill reference"
+   ],
+   "rows": [
+    {
+     "id": "Rules-2",
+     "values": [
+      "RULE-POLICY-RBAC",
+      "Rule / Type: RBAC / Policy; Description: Permit an operation only for an authorized role in the selected Organization.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: SK-INTAKE (proposed); Inputs: org, actor, role, operation, approved access matrix.; Enforce: before data access or an external operation.; Gate: approved matrix explicitly permits this actor and operation.",
+      "No approved matrix / wrong org / denied role: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 2
+    },
+    {
+     "id": "Rules-3",
+     "values": [
+      "RULE-SKILL-PROMPT",
+      "Rule / Type: Skill generation / Prompt; Description: Generate a draft skill from supplied sources, citing evidence and marking missing fields; return the agreed schema.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: SK-RESOURCE (proposed); Inputs: source refs, requested skill, output schema, applicable Policy IDs.; Enforce: generation and output review.; Gate: sources cited, schema valid, unknowns labelled; policy remains a separate gate.",
+      "Missing source/schema: request it. Output stays draft; do not create or approve a skill automatically.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-RESOURCE"
+     ],
+     "sourceRow": 3
+    },
+    {
+     "id": "Rules-4",
+     "values": [
+      "RULE-BUDGET-EST",
+      "Rule / Type: Ad budget consolidation / Estimation; Description: Estimate a planning range from comparable campaign evidence. Keep assumptions, period, currency and uncertainty with the estimate.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: SK-STRATEGY (proposed); Inputs: channel estimates, comparables, period, currency, assumptions and overlap.; Enforce: strategy planning.; Gate: produce low / working / high values from a documented method; avoid double counting. Apply RULE-POLICY-SPEND separately.",
+      "Missing comparable evidence: mark unknown. No spend commitment or guaranteed outcome.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-STRATEGY"
+     ],
+     "sourceRow": 4
+    },
+    {
+     "id": "Rules-5",
+     "values": [
+      "RULE-QUOTE-CALC",
+      "Rule / Type: Quote generation / Calculation; Description: Template only: total = fixed cost + quantity x approved unit rate. Version the formula, units, currency and rounding. Estimated inputs produce an estimate.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: MFG-SK-5 (proposed); Inputs: fixed cost, quantity, approved rate/version, units, currency, rounding; tax/freight treatment explicit.; Enforce: quote calculation, not send approval.; Gate: complete compatible inputs and independently checked arithmetic.",
+      "Missing/incompatible inputs: no total. Quote remains draft; no actual rate, approval or quoting capability implied.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 5
+    },
+    {
+     "id": "Rules-6",
+     "values": [
+      "RULE-WEB-LINK",
+      "Rule / Type: Website linking / Validation; Description: Check required destination URLs and internal links before publishing a website change.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: SK-LANDING (proposed); Inputs: source page, destination URL, intended target and test result.; Enforce: pre-publication QA.; Gate: link resolves to the intended content and correct tenant; apply RULE-POLICY-LAUNCH separately.",
+      "Broken / wrong / unverified destination: hold the affected publication and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LANDING"
+     ],
+     "sourceRow": 6
+    },
+    {
+     "id": "Rules-7",
+     "values": [
+      "RULE-LEAD-ROUTE",
+      "Rule / Type: Lead generation / Decision/routing; Description: Route a qualified lead using an approved Organization-specific routing matrix, without inventing an owner.",
+      "Design source: Rules 2 starter row and 2026-10-26 recommendation; company source/approval not confirmed.",
+      "Org: ORG-HQ-01 (proposed starter scope; units ORG-BU-01/02); Skills: SK-INTAKE (proposed); Inputs: lead criteria, org, consent basis, approved routing matrix and destination owner.; Enforce: before routing or outreach.; Gate: criteria match an approved destination; apply RULE-POLICY-PRIVACY and RULE-POLICY-LAUNCH separately.",
+      "No unique match / missing basis: review queue, no outreach or guessed assignment.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed starter; not approved / not implemented",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 7
+    },
+    {
+     "id": "Rules-8",
+     "values": [
+      "RULE-POLICY-CLAIM",
+      "Rule / Type: Claims / evidence / Policy; Description: Only approved claims backed by current evidence",
+      "Company source/approval not confirmed; historical snapshot was not revalidated.",
+      "Org: ORG-HQ-01; ORG-BU-01; ORG-BU-02 (existing Org backlinks; approval: DigiBull marketing lead); Skills: SK-CURATE; SK-DRAFT (proposed); Inputs: claim ID, proof source/version, expiry, market; Enforce: before the relevant operation; Gate: Only approved claims backed by current evidence",
+      "Unsupported/expired claim -> human review",
+      "Brand/legal owner: DigiBull",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-CURATE"
+     ],
+     "sourceRow": 8
+    },
+    {
+     "id": "Rules-9",
+     "values": [
+      "RULE-POLICY-PRIVACY",
+      "Rule / Type: Consent / PII / Policy; Description: Restrict retrieval/use by tenant, channel and consent",
+      "Company source/approval not confirmed; historical snapshot was not revalidated.",
+      "Org: ORG-HQ-01; ORG-BU-01; ORG-BU-02 (existing Org backlinks; approval: DigiBull marketing lead); Skills: SK-INTAKE; SK-MEASURE; SK-PUBLISH (proposed); Inputs: contact source, consent status, geography, retention; Enforce: before the relevant operation; Gate: Restrict retrieval/use by tenant, channel and consent",
+      "Missing basis or conflict -> no outreach",
+      "Privacy owner: DigiBull",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 9
+    },
+    {
+     "id": "Rules-10",
+     "values": [
+      "RULE-POLICY-PLATFORM",
+      "Rule / Type: Channel policy / Policy; Description: Meet platform and brand rules for each channel",
+      "Company source/approval not confirmed; historical snapshot was not revalidated.",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LAUNCH; SK-PUBLISH (proposed); Inputs: platform, asset type, audience, account; Enforce: before the relevant operation; Gate: Meet platform and brand rules for each channel",
+      "Unapproved account or noncompliant format -> stop",
+      "Channel owner: DigiBull",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LAUNCH"
+     ],
+     "sourceRow": 10
+    },
+    {
+     "id": "Rules-11",
+     "values": [
+      "RULE-POLICY-LAUNCH",
+      "Rule / Type: Publish/send gate / Policy; Description: Require scoped approval for each send/publish shape",
+      "Company source / approval: DigiBull design review; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01; ORG-BU-01; ORG-BU-02 (existing Org backlinks; approval: DigiBull marketing lead); Skills: SK-LAUNCH; SK-PUBLISH (proposed); Inputs: final copy, recipients/audience, approver, scheduled time; Enforce: before the relevant operation; Gate: Require scoped approval for each send/publish shape",
+      "Draft and review only until approval",
+      "Campaign owner: DigiBull",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LAUNCH"
+     ],
+     "sourceRow": 11
+    },
+    {
+     "id": "Rules-12",
+     "values": [
+      "RULE-POLICY-SPEND",
+      "Rule / Type: Ad budget / pause / Policy; Description: Separate budget approval from planning; enforce cap and stop signal",
+      "Company source / approval: DigiBull design review; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-STRATEGY; SK-LAUNCH (proposed); Inputs: account, budget ceiling, dates, approved creative; Enforce: before the relevant operation; Gate: Separate budget approval from planning; enforce cap and stop signal",
+      "No spend without approval or above cap",
+      "Budget owner: DigiBull",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-STRATEGY"
+     ],
+     "sourceRow": 12
+    },
+    {
+     "id": "Rules-13",
+     "values": [
+      "RULE-POLICY-GSC",
+      "Rule / Type: Indexing intent / Policy; Description: Keep deliberate exclusions; approve site changes",
+      "Company source / approval: DigiBull design review; approval: DigiBull; Test / evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-GSC (proposed); Inputs: URL; intended state; cause; exact change; test; Enforce: before the relevant operation; Gate: Keep deliberate exclusions; approve site changes; Channel / account: approved channel account per campaign",
+      "No intended state / failed live test -> review",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-GSC"
+     ],
+     "sourceRow": 13
+    },
+    {
+     "id": "Rules-14",
+     "values": [
+      "RULE-POLICY-LOCAL",
+      "Rule / Type: Listing / media / Policy; Description: Verify eligibility and current media policy",
+      "Company source / approval: DigiBull design review; approval: DigiBull; Test / evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LOCAL; SK-GBP-PHOTO; SK-GBP-VIDEO (proposed); Inputs: location; owner; NAP; policy; rights; specs; Enforce: before the relevant operation; Gate: Verify eligibility and current media policy; Channel / account: approved channel account per campaign",
+      "Unverified owner/rights -> no release",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LOCAL"
+     ],
+     "sourceRow": 14
+    },
+    {
+     "id": "Rules-15",
+     "values": [
+      "RULE-POLICY-RESOURCE",
+      "Rule / Type: Component binding / Policy; Description: Catalog example is not a configured integration",
+      "Company source / approval: DigiBull design review; approval: DigiBull; Test / evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-RESOURCE (proposed); Inputs: category; URI; version; license; scopes; costs; tests; Enforce: before the relevant operation; Gate: Catalog example is not a configured integration; Channel / account: approved channel account per campaign",
+      "Untested/unbound/paid resource -> draft only",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-RESOURCE"
+     ],
+     "sourceRow": 15
+    },
+    {
+     "id": "Rules-16",
+     "values": [
+      "RULE-POLICY-EXPECT",
+      "Rule / Type: Strategy expectations / Policy; Description: No guaranteed ranking/citations/leads/ROI",
+      "Company source / approval: DigiBull design review; approval: DigiBull; Test / evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-STRATEGY (proposed); Inputs: baseline; budget; horizon; targets; assumptions; Enforce: before the relevant operation; Gate: No guaranteed ranking/citations/leads/ROI; Channel / account: approved channel account per campaign",
+      "Unsupported target -> revise",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-STRATEGY"
+     ],
+     "sourceRow": 16
+    },
+    {
+     "id": "Rules-17",
+     "values": [
+      "RULE-POLICY-REPORT-01",
+      "Rule / Type: Intelligence / measurement / Policy; Description: Separate actual results from estimates",
+      "Company source / approval: DigiBull design review; approval: DigiBull; Test / evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-MEASURE (proposed); Inputs: source; period; metric; baseline; attribution; Enforce: before the relevant operation; Gate: Separate actual results from estimates; Channel / account: approved channel account per campaign",
+      "Missing source/freshness -> label unknown",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-MEASURE"
+     ],
+     "sourceRow": 17
+    },
+    {
+     "id": "Rules-18",
+     "values": [
+      "RULE-POLICY-RES-01",
+      "Rule / Type: ISO / IT / HR / RBAC / guidelines / Policy; Description: Reference examples: ISO/IEC 27001:2022 for information security; NIST RBAC project for role-based access control. IT/HR policies must be approved organisation documents. Applicability/version/owner must be captured; no certification implied.",
+      "Company source / approval: DigiBull design review; Resource: RESOURCE-01; Reference (not approval): https://www.iso.org/cms/live/live/en/sites/isoorg/contents/data/standard/08/28/82875.html; https://csrc.nist.gov/projects/role-based-access-control; Source location: 1DV8HJtdeHXYitEgB4sE7Xnf-dUb1odaynpv_4rb07FQ / BuLLGTM!A112:R112; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-INTAKE; SK-RESOURCE (proposed); Inputs: doc_ref; applicability; version; effective_at; owner; Enforce: before the relevant operation; Gate: Reference examples: ISO/IEC 27001:2022 for information security; NIST RBAC project for role-based access control. IT/HR policies must be approved organisation documents. Applicability/version/owner must be captured; no certification implied.",
+      "Review before binding or effect; no policy approval inferred",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 18
+    },
+    {
+     "id": "Rules-19",
+     "values": [
+      "RULE-POLICY-RES-22",
+      "Rule / Type: Release record / tests / logs / Policy; Description: Close draft-to-live boundary: approved asset/account/audience/time, tests, readback, stop reason and rollback.",
+      "Company source / approval: DigiBull design review; Resource: RESOURCE-22; Reference (not approval): Proposed control design; Source location: 1DV8HJtdeHXYitEgB4sE7Xnf-dUb1odaynpv_4rb07FQ / BuLLGTM!A133:R133; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-DEMO-01 / actual org ORG-HQ-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LAUNCH; SK-PUBLISH (proposed); Inputs: approval; version; destination; result; rollback; Enforce: before the relevant operation; Gate: Close draft-to-live boundary: approved asset/account/audience/time, tests, readback, stop reason and rollback.",
+      "Review before binding or effect; no policy approval inferred",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LAUNCH"
+     ],
+     "sourceRow": 19
+    },
+    {
+     "id": "Rules-20",
+     "values": [
+      "RULE-EDGE-TENANT",
+      "Rule / Type: Wrong company or brand context / Policy test case; Description: Proposed edge-case test of RULE-POLICY-PRIVACY.",
+      "Company source / approval: RULE-POLICY-PRIVACY; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-PRIVACY; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-01 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-INTAKE; SK-MEASURE; SK-PUBLISH (proposed); Inputs: org/account differs from approved scope; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Stop; select correct company; Channel / account: approved channel account per campaign",
+      "Stop; select correct company",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 20
+    },
+    {
+     "id": "Rules-21",
+     "values": [
+      "RULE-EDGE-SOURCE",
+      "Rule / Type: Conflicting or stale source / Policy test case; Description: Proposed edge-case test of RULE-POLICY-CLAIM.",
+      "Company source / approval: RULE-POLICY-CLAIM; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-CLAIM; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-02 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-CURATE; SK-DRAFT (proposed); Inputs: newer source disagrees / expiry passed; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Review authoritative source; no silent merge; Channel / account: approved channel account per campaign",
+      "Review authoritative source; no silent merge",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-CURATE"
+     ],
+     "sourceRow": 21
+    },
+    {
+     "id": "Rules-22",
+     "values": [
+      "RULE-EDGE-APPROVAL",
+      "Rule / Type: Approval revoked or narrower / Policy test case; Description: Proposed edge-case test of RULE-POLICY-LAUNCH.",
+      "Company source / approval: RULE-POLICY-LAUNCH; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-LAUNCH; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-03 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LAUNCH; SK-PUBLISH (proposed); Inputs: final audience / wording differs; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Stop affected send/publish; Channel / account: approved channel account per campaign",
+      "Stop affected send/publish",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LAUNCH"
+     ],
+     "sourceRow": 22
+    },
+    {
+     "id": "Rules-23",
+     "values": [
+      "RULE-EDGE-CAP",
+      "Rule / Type: Budget at or above limit / Policy test case; Description: Proposed edge-case test of RULE-POLICY-SPEND.",
+      "Company source / approval: RULE-POLICY-SPEND; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-SPEND; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-04 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-STRATEGY; SK-LAUNCH (proposed); Inputs: final cost plus fees exceeds approved cap; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Stop; request revised budget; Channel / account: approved channel account per campaign",
+      "Stop; request revised budget",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-STRATEGY"
+     ],
+     "sourceRow": 23
+    },
+    {
+     "id": "Rules-24",
+     "values": [
+      "RULE-EDGE-CONSENT",
+      "Rule / Type: Missing consent / channel basis / Policy test case; Description: Proposed edge-case test of RULE-POLICY-PRIVACY.",
+      "Company source / approval: RULE-POLICY-PRIVACY; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-PRIVACY; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-05 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-INTAKE; SK-MEASURE; SK-PUBLISH (proposed); Inputs: contact source or permission unresolved; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: No outreach; review; Channel / account: approved channel account per campaign",
+      "No outreach; review",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-INTAKE"
+     ],
+     "sourceRow": 24
+    },
+    {
+     "id": "Rules-25",
+     "values": [
+      "RULE-EDGE-GSC",
+      "Rule / Type: Deliberate noindex / exclusion / Policy test case; Description: Proposed edge-case test of RULE-POLICY-GSC.",
+      "Company source / approval: RULE-POLICY-GSC; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-GSC; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-06 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-GSC (proposed); Inputs: URL intentionally excluded; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Do not remove deliberate exclusion; Channel / account: approved channel account per campaign",
+      "Do not remove deliberate exclusion",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-GSC"
+     ],
+     "sourceRow": 25
+    },
+    {
+     "id": "Rules-26",
+     "values": [
+      "RULE-EDGE-LOCATION",
+      "Rule / Type: Conflicting listing / rights / Policy test case; Description: Proposed edge-case test of RULE-POLICY-LOCAL.",
+      "Company source / approval: RULE-POLICY-LOCAL; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-LOCAL; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-07 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LOCAL; SK-GBP-PHOTO; SK-GBP-VIDEO (proposed); Inputs: NAP mismatch or asset rights missing; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Hold listing/media change; Channel / account: approved channel account per campaign",
+      "Hold listing/media change",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LOCAL"
+     ],
+     "sourceRow": 26
+    },
+    {
+     "id": "Rules-27",
+     "values": [
+      "RULE-EDGE-TOOL",
+      "Rule / Type: Missing binding or expired access / Policy test case; Description: Proposed edge-case test of RULE-POLICY-RESOURCE.",
+      "Company source / approval: RULE-POLICY-RESOURCE; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-RESOURCE; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-08 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-RESOURCE (proposed); Inputs: tool endpoint/version/auth/rights not verified; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Draft only; verify binding; Channel / account: approved channel account per campaign",
+      "Draft only; verify binding",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-RESOURCE"
+     ],
+     "sourceRow": 27
+    },
+    {
+     "id": "Rules-28",
+     "values": [
+      "RULE-EDGE-RETRY",
+      "Rule / Type: Duplicate or partially completed action / Policy test case; Description: Proposed edge-case test of RULE-POLICY-RES-22.",
+      "Company source / approval: RULE-POLICY-RES-22; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-RES-22; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-09 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-LAUNCH; SK-PUBLISH (proposed); Inputs: retry finds possible existing side effect; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Read state; do not duplicate; Channel / account: approved channel account per campaign",
+      "Read state; do not duplicate",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-LAUNCH"
+     ],
+     "sourceRow": 28
+    },
+    {
+     "id": "Rules-29",
+     "values": [
+      "RULE-EDGE-REPORT",
+      "Rule / Type: Missing baseline / attribution / Policy test case; Description: Proposed edge-case test of RULE-POLICY-REPORT-01.",
+      "Company source / approval: RULE-POLICY-REPORT-01; approved policy source: BuLLM policy board; Parent rule: RULE-POLICY-REPORT-01; Test / evidence: Pass only when expected stop/review and audit record are observed; evidence: design review notes; Original fields / snapshot: see this cell note (historical, not revalidated).; Legacy Org reference: ORG-MOCK-10 (historical; not a current join).",
+      "Org: ORG-HQ-01 (proposed; units ORG-BU-01/02); Skills: SK-MEASURE (proposed); Inputs: metric source/date/join unavailable; Enforce: test of parent rule; not an additional active policy; Gate: Expected behavior: Label unknown; no ROI or performance guarantee; Channel / account: approved channel account per campaign",
+      "Label unknown; no ROI or performance guarantee",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed edge-case design; not executed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "SK-MEASURE"
+     ],
+     "sourceRow": 29
+    },
+    {
+     "id": "Rules-30",
+     "values": [
+      "RULE-DOMAIN-PCBA-COSTING",
+      "Rule / Type: Engineering rules, BOM costing formulas, and PCBA manufacturing guidelines; PCB Panelization: 2x2 Array, 1.6mm FR4 Tg180, Edge Rail 10mm, Breakaway Tabs; Components (BOM): Active/Passive SMT, BGA/QFP IC Packages, MSD Level 3-6 handling; Materials & Finish: ENIG (Electroless Nickel Immersion Gold), Lead-Free HASL; Box Build: IP67 Aluminum Enclosure, Wire Harness Assembly, Torque Specs; Machine HR Rates: SMT Line: $120/hr, Manual Assembly: $45/hr, Testing: $65/hr; Outsourced Services: X-Ray Inspection ($150/lot), Conformal Coating Subcontract; Assembly Routing: Paste Print  Pick & Place  Reflow  AOI  Wave Solder  ICT; Rules (DFM/Sourcing): Min trace 4mil, Flag single-source parts, Flag lead time > 16 weeks; Misc: Standard Scrap Rate: 1.5%, Waste Factor: 2.0%; Search tag: mfg-rule-01; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"domain rule\",\"costing rule\"],\"synonyms\":[\"engineering and BOM costing rules\",\"PCBA guidelines\"],\"lsi_style\":[\"panelization\",\"laminate\",\"margin\",\"price break\"],\"autosuggest\":[\"costing rules\"],\"schema_fields\":[\"Domain Rule\",\"Rules (DFM/Sourcing)\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 4; RAG Reference: {\"Example\": \"PCBA Costing Standard\", \"Links / Path\": \"s3://domain-rules/pcba_costing_v1.json\", \"Entity / Node Type\": \"DomainKnowledge\", \"Security / Access Level\": \"Internal\", \"Refresh Frequency\": \"Quarterly\", \"ID Field\": \"DOM-PCBA-01\", \"Parent Entity\": \"ORG-001\"}",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during PCBA costing; Gate: panelization and DFM guidelines applied.",
+      "Guideline conflict: engineer review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 30
+    },
+    {
+     "id": "Rules-31",
+     "values": [
+      "RULE-POLICY-BOM",
+      "Rule / Type: RULE-BOM: EMS; Scrub BOM / CBOM. Policy: Compare source and costed BOM; count unique/shared/missing lines; Rules (DFM/Sourcing): Stop on unresolved MPN, qty/unit or uncosted line; Misc: Source fields needed after load: FG, parent line, CPN, MPN, qty, UoM, commodity. Approval: Version draft-1; QA owner DigiBull. Status: Proposed; Search tag: mfg-rule-02; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"RULE-BOM\",\"BOM scrub rule\"],\"synonyms\":[\"BOM validation\",\"BOM comparison\"],\"lsi_style\":[\"CBOM\",\"source BOM\",\"missing lines\"],\"autosuggest\":[\"bom check\"],\"schema_fields\":[\"Rule\",\"Policy\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 5",
+      "Org: ORG-HQ-01; Skills: MFG-SK-3; Enforce: after BOM load; Gate: every line costed or flagged.",
+      "Unresolved MPN, qty/unit or uncosted line: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-3"
+     ],
+     "sourceRow": 31
+    },
+    {
+     "id": "Rules-32",
+     "values": [
+      "RULE-POLICY-OFFER",
+      "Rule / Type: RULE-OFFER: EMS; CBOM / BOM Matrix. Policy: Convert with approved FX; check pack/MOQ and offer validity; Rules (DFM/Sourcing): Expired offer, missing FX or supplier exception -> review; Misc: Source fields needed after load: supplier offer, original currency/price, FX as-of, MOQ, pack, stock, lead time, expiry, NCNR. Approval: Finance/sourcing approval: DigiBull sourcing. Status: Proposed; Search tag: mfg-rule-03; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"RULE-OFFER\",\"offer rule\"],\"synonyms\":[\"supplier offer conversion\",\"FX and MOQ check\"],\"lsi_style\":[\"FX\",\"pack\",\"MOQ\",\"offer validity\"],\"autosuggest\":[\"offer check\"],\"schema_fields\":[\"Rule\",\"Policy\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 6",
+      "Org: ORG-HQ-01; Skills: MFG-SK-4; Enforce: on offer load; Gate: approved FX, valid offer, pack/MOQ checked.",
+      "Expired offer, missing FX or supplier exception: review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-4"
+     ],
+     "sourceRow": 32
+    },
+    {
+     "id": "Rules-33",
+     "values": [
+      "RULE-POLICY-EXCESS",
+      "Rule / Type: RULE-EXCESS: EMS; excess inventory / cashflow. Policy: Compute shortage, rounded buy, excess and cost; Rules (DFM/Sourcing): Missing stock snapshot, rate or term -> review; Misc: Source fields needed after load: scenario qty, batch qty, stock as-of, scrap class, MOQ, pack, supplier terms. Approval: Finance approval: DigiBull finance. Status: Proposed; Search tag: mfg-rule-04; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"RULE-EXCESS\",\"excess rule\"],\"synonyms\":[\"excess inventory\",\"shortage calculation\"],\"lsi_style\":[\"shortage\",\"rounded buy\",\"cashflow\"],\"autosuggest\":[\"excess inventory\"],\"schema_fields\":[\"Rule\",\"Policy\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 7",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: shortage and rounded-buy computed on the same basis.",
+      "Excess treated as purchase authority: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 33
+    },
+    {
+     "id": "Rules-34",
+     "values": [
+      "RULE-POLICY-REPORT-02",
+      "Rule / Type: RULE-REPORT: EMS; analytics / revision / NRE. Policy: Group lead time/ABC, track one-time NRE, compare same-basis revisions; Rules (DFM/Sourcing): Mismatch, double NRE or unsupported formula -> review; Misc: Source fields needed after load: FG, CPN, old/new revision, lead weeks, NRE type, converted cost. Approval: QA/finance approval: DigiBull QA. Status: Proposed; Search tag: mfg-rule-05; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"RULE-REPORT\",\"analytics rule\"],\"synonyms\":[\"lead time analysis\",\"NRE tracking\",\"revision comparison\"],\"lsi_style\":[\"ABC analysis\",\"NRE\",\"revision\"],\"autosuggest\":[\"revision compare\"],\"schema_fields\":[\"Rule\",\"Policy\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 8",
+      "Org: ORG-HQ-01; Skills: MFG-SK-6; Enforce: at analysis; Gate: comparisons on the same basis; one-time NRE tracked.",
+      "Mixed-basis comparison or repeated NRE: review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-6"
+     ],
+     "sourceRow": 34
+    },
+    {
+     "id": "Rules-35",
+     "values": [
+      "RULE-POLICY-CORE",
+      "Rule / Type: RULE-CORE: Core manufacturing extension. Policy: Engineer-selected routing and costing policy; Rules (DFM/Sourcing): No quote without sourced specs and rates; Misc: Source fields needed after load: part, revision, material, drawing/MTO reference, process. Approval: Engineer approval: DigiBull engineering. Status: Illustrative; Search tag: mfg-rule-06; Existing source content, proposed/mock - not verified deployment; Search metadata: {\"aka\":[\"RULE-CORE\",\"core extension rule\"],\"synonyms\":[\"engineer-selected routing and costing policy\"],\"lsi_style\":[\"routing\",\"costing\",\"CAD\"],\"autosuggest\":[\"core costing\"],\"schema_fields\":[\"Rule\",\"Policy\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 9",
+      "Org: ORG-HQ-01; Skills: MFG-SK-8; Enforce: engineer review; Gate: routing and costing chosen by an engineer.",
+      "No engineer selection: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-8"
+     ],
+     "sourceRow": 35
+    },
+    {
+     "id": "Rules-36",
+     "values": [
+      "RULE-CHECKLIST-BOM-VALIDATION",
+      "Rule / Type: MFG-RES-003: BOM validation checklist. Link the documented v3.0 checklist: input scrub, MCL, settings, cross-reference and output BOM validation.; Rules (DFM/Sourcing): 155 documented checks are reference scope, not proof they run in BuLLM; QA approval required.; Misc: RESOURCE MFG-RES-003; Search tag: mfg-bom-qa; Status: Proposed / not configured; Related: RULE-BOM / RULE-REPORT / AG-QA; Source: https://docs.google.com/spreadsheets/d/1Oe1l6GM0XWQATDgTsixMiMROr-h3w-Zu/edit?usp=drivesdk&ouid=103101952948491508917&rtpof=true&sd=true&authuser=sriniketh.s%40digibull.ai; Checked: 7 Oct 2026; Binding/version/approval: draft-1 (DigiBull); Input keys: check ID, criticality, source/version, input/output row references; Output: Versioned checks and exception queue; Search metadata: {\"aka\":[\"MFG-RES-003\",\"BOM validation checklist\"],\"synonyms\":[\"BOM QA\",\"input scrub checklist\"],\"lsi_style\":[\"MCL\",\"cross-reference\",\"output BOM\"],\"autosuggest\":[\"bom validation\"],\"schema_fields\":[\"Rules (DFM/Sourcing)\",\"RAG Reference\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 10",
+      "Org: ORG-HQ-01; Skills: MFG-SK-3; Enforce: BOM validation; Gate: documented v3.0 checklist steps pass.",
+      "Checklist step fails: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-3"
+     ],
+     "sourceRow": 36
+    },
+    {
+     "id": "Rules-37",
+     "values": [
+      "RULE-POLICY-QUOTE-APPROVAL",
+      "Rule / Type: MFG-RES-004: Quote approval and export gate. Follow documented review/halt or Approve & Continue before quote exports.; Rules (DFM/Sourcing): No automatic external quote delivery, purchase, substitution or unsourced costs.; Misc: RESOURCE MFG-RES-004; Search tag: mfg-quote-gate; Status: Proposed / not configured; Related: RULE-OFFER / RULE-REPORT / SK-EXPORT; Source: https://docs.google.com/document/d/1_kRLQUcDcYh0vj8_NaVZ_fs-L9nsJO0v0e8gMEyipk8/edit?usp=drivesdk&authuser=sriniketh.s%40digibull.ai; Checked: 7 Oct 2026; Binding/version/approval: draft-1 (DigiBull); Input keys: RFQ/run ID, BOM/pricing evidence, reviewer, approval timestamp, template version; Output: Readiness and approval reference; Search metadata: {\"aka\":[\"MFG-RES-004\",\"quote approval gate\"],\"synonyms\":[\"quote export gate\",\"approve and continue\"],\"lsi_style\":[\"review\",\"halt\",\"quote export\"],\"autosuggest\":[\"quote approval\"],\"schema_fields\":[\"Rules (DFM/Sourcing)\",\"RAG Reference\"]}",
+      "BuLLM - Manufacturing Masters v0.2, Rules row 11",
+      "Org: ORG-HQ-01; Skills: MFG-SK-7; Enforce: before quote export; Gate: documented review and approval recorded.",
+      "Missing approval: halt export.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-7"
+     ],
+     "sourceRow": 37
+    },
+    {
+     "id": "Rules-38",
+     "values": [
+      "RULE-COST-01",
+      "Material Pricing · Calculation; Looks up the material price for a quote line, from a governed price source.",
+      "Lovable demo (proposed) · approval: DigiBull",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: versioned rates and checked arithmetic.",
+      "Missing rate or source: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 38
+    },
+    {
+     "id": "Rules-39",
+     "values": [
+      "RULE-COST-02",
+      "Surface Finish · Calculation; Adds surface finish cost from finish type and area.",
+      "Lovable demo (proposed) · approval: DigiBull",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: versioned rates and checked arithmetic.",
+      "Missing rate or source: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 39
+    },
+    {
+     "id": "Rules-40",
+     "values": [
+      "RULE-COST-03",
+      "Currency Converter · Calculation; Converts quote currencies into one base currency with dated rates.",
+      "Lovable demo (proposed) · approval: DigiBull",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: versioned rates and checked arithmetic.",
+      "Missing rate or source: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 40
+    },
+    {
+     "id": "Rules-41",
+     "values": [
+      "RULE-COST-04",
+      "Machine Hour Rate · Calculation; Works out the hourly machine rate from machine cost, utilisation and overheads.",
+      "Lovable demo (proposed) · approval: DigiBull",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: versioned rates and checked arithmetic.",
+      "Missing rate or source: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 41
+    },
+    {
+     "id": "Rules-42",
+     "values": [
+      "RULE-COST-05",
+      "Costing Rules · Estimation; Rolls material, finish and machine time up into one estimate.",
+      "Lovable demo (proposed) · approval: DigiBull",
+      "Org: ORG-HQ-01; Skills: MFG-SK-5; Enforce: during costing; Gate: versioned rates and checked arithmetic.",
+      "Missing rate or source: stop and review.",
+      "Owner: DigiBull; Version: draft-1",
+      "Proposed",
+      "Effective: 03-11-2026; Review: quarterly",
+      "MFG-SK-5"
+     ],
+     "sourceRow": 42
+    }
+   ],
+   "removedRows": [],
+   "notes": [],
+   "readOnly": false
+  },
+  {
+   "name": "Tools",
+   "headers": [
+    "Tooling ID",
+    "Tool Name",
+    "Category",
+    "Links / Path",
+    "Owner / access",
+    "Status",
+    "Source version / checked_at",
+    "Refresh Frequency",
+    "Record type",
+    "Source tab",
+    "BuLLM badge",
+    "License"
+   ],
+   "descriptions": [
+    "Stable tool/category ID",
+    "Examples only; not configured integrations",
+    "Add-on category specified by user",
+    "Confirmed URL / repo / document path; a placeholder path otherwise",
+    "Named owner/permissions",
+    "Record and deployment status",
+    "Registry version/date; tool version and freshness noted",
+    "Source refresh cadence to confirm",
+    "Agent, Assistant, MCP server, OSS repo, Skill, API, Framework or Enterprise system",
+    "Leaderboard, Repo Library, Skill Library or Tech Stack",
+    "BuLLM Recommended, BuLLM Tested, Gap or High fit",
+    "Open-source license as the SPDX short ID (e.g. MIT, Apache-2.0); Proprietary for commercial tools, Proprietary (internal) for company-built tools"
+   ],
+   "rows": [
+    {
+     "id": "Tools-2",
+     "values": [
+      "TF-01",
+      "Claude Code",
+      "Agents",
+      "anthropics/claude-code",
+      "DigiBull / vendor account",
+      "Reference",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Leaderboard #7",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 2
+    },
+    {
+     "id": "Tools-3",
+     "values": [
+      "TF-02",
+      "opencode",
+      "Agents",
+      "github.com/opencode-ai/opencode",
+      "DigiBull / vendor account",
+      "Candidate to pilot",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Leaderboard #13",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 3
+    },
+    {
+     "id": "Tools-4",
+     "values": [
+      "TF-03",
+      "OpenAI Codex",
+      "Agents",
+      "github.com/openai/codex",
+      "DigiBull / vendor account",
+      "Watch",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Leaderboard #15",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 4
+    },
+    {
+     "id": "Tools-5",
+     "values": [
+      "TF-04",
+      "browser-use",
+      "Agents",
+      "github.com/browser-use/browser-use",
+      "DigiBull / vendor account",
+      "Candidate to pilot",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Leaderboard #16",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 5
+    },
+    {
+     "id": "Tools-6",
+     "values": [
+      "TF-05",
+      "Goose",
+      "Agents",
+      "github.com/block/goose",
+      "DigiBull / vendor account",
+      "Watch",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Repo Library classics",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 6
+    },
+    {
+     "id": "Tools-7",
+     "values": [
+      "TF-06",
+      "Cline",
+      "Agents",
+      "github.com/cline/cline",
+      "DigiBull / vendor account",
+      "Watch",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Agent",
+      "Repo Library classics",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 7
+    },
+    {
+     "id": "Tools-8",
+     "values": [
+      "TF-07",
+      "CopilotKit",
+      "Assistants",
+      "CopilotKit/CopilotKit",
+      "DigiBull / vendor account",
+      "Candidate to pilot",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "Assistant",
+      "Leaderboard #9",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 8
+    },
+    {
+     "id": "Tools-9",
+     "values": [
+      "TF-08",
+      "assistant-ui",
+      "Assistants",
+      "github.com/assistant-ui/assistant-ui",
+      "DigiBull / vendor account",
+      "In use",
+      "Snapshot 03-11-2026",
+      "Weekly scan",
+      "Assistant",
+      "Tech Stack",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 9
+    },
+    {
+     "id": "Tools-10",
+     "values": [
+      "TF-09",
+      "Dify",
+      "Assistants",
+      "github.com/langgenius/dify",
+      "DigiBull / vendor account",
+      "Watch",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Assistant",
+      "Repo Library classics",
+      "-",
+      "Apache-2.0 (modified)"
+     ],
+     "sourceRow": 10
+    },
+    {
+     "id": "Tools-11",
+     "values": [
+      "TF-10",
+      "Flowise",
+      "Assistants",
+      "github.com/FlowiseAI/Flowise",
+      "DigiBull / vendor account",
+      "Reference",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Assistant",
+      "Repo Library classics",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 11
+    },
+    {
+     "id": "Tools-12",
+     "values": [
+      "TF-11",
+      "MCP reference servers",
+      "MCPs",
+      "modelcontextprotocol/servers",
+      "DigiBull / self-hosted",
+      "Reference",
+      "Snapshot 31-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Leaderboard #3",
+      "-",
+      "MIT / Apache-2.0 (transition)"
+     ],
+     "sourceRow": 12
+    },
+    {
+     "id": "Tools-13",
+     "values": [
+      "TF-12",
+      "Postgres MCP Pro",
+      "MCPs",
+      "github.com/crystaldba/postgres-mcp",
+      "DigiBull / self-hosted",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 13
+    },
+    {
+     "id": "Tools-14",
+     "values": [
+      "TF-13",
+      "DBHub",
+      "MCPs",
+      "github.com/bytebase/dbhub",
+      "DigiBull / self-hosted",
+      "Adopted",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 14
+    },
+    {
+     "id": "Tools-15",
+     "values": [
+      "TF-14",
+      "MongoDB (official)",
+      "MCPs",
+      "github.com/mongodb-js/mongodb-mcp-server",
+      "DigiBull / self-hosted",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "BuLLM Tested",
+      "Apache-2.0"
+     ],
+     "sourceRow": 15
+    },
+    {
+     "id": "Tools-16",
+     "values": [
+      "TF-15",
+      "Neo4j",
+      "MCPs",
+      "github.com/neo4j-contrib/mcp-neo4j",
+      "DigiBull / self-hosted",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "BuLLM Tested",
+      "MIT"
+     ],
+     "sourceRow": 16
+    },
+    {
+     "id": "Tools-17",
+     "values": [
+      "TF-16",
+      "Qdrant (official)",
+      "MCPs",
+      "github.com/qdrant/mcp-server-qdrant",
+      "DigiBull / self-hosted",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "BuLLM Tested",
+      "Apache-2.0"
+     ],
+     "sourceRow": 17
+    },
+    {
+     "id": "Tools-18",
+     "values": [
+      "TF-17",
+      "Filesystem (reference)",
+      "MCPs",
+      "github.com/modelcontextprotocol/servers (filesystem)",
+      "DigiBull / self-hosted",
+      "Add to config",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "-",
+      "MIT / Apache-2.0 (transition)"
+     ],
+     "sourceRow": 18
+    },
+    {
+     "id": "Tools-19",
+     "values": [
+      "TF-18",
+      "Fetch (reference)",
+      "MCPs",
+      "github.com/modelcontextprotocol/servers (fetch)",
+      "DigiBull / self-hosted",
+      "Add to config",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "MCP server",
+      "Repo Library",
+      "-",
+      "MIT / Apache-2.0 (transition)"
+     ],
+     "sourceRow": 19
+    },
+    {
+     "id": "Tools-20",
+     "values": [
+      "TF-19",
+      "PaddleOCR",
+      "OSS",
+      "PaddlePaddle/PaddleOCR",
+      "DigiBull / OSS dependency",
+      "Adopted",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "Apache-2.0"
+     ],
+     "sourceRow": 20
+    },
+    {
+     "id": "Tools-21",
+     "values": [
+      "TF-20",
+      "crawl4ai",
+      "OSS",
+      "github.com/unclecode/crawl4ai",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "Apache-2.0"
+     ],
+     "sourceRow": 21
+    },
+    {
+     "id": "Tools-22",
+     "values": [
+      "TF-21",
+      "Stirling-PDF",
+      "OSS",
+      "github.com/Stirling-Tools/Stirling-PDF",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 22
+    },
+    {
+     "id": "Tools-23",
+     "values": [
+      "TF-22",
+      "Paperless-ngx",
+      "OSS",
+      "github.com/paperless-ngx/paperless-ngx",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 23
+    },
+    {
+     "id": "Tools-24",
+     "values": [
+      "TF-23",
+      "OCRmyPDF",
+      "OSS",
+      "github.com/ocrmypdf/OCRmyPDF",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "MPL-2.0"
+     ],
+     "sourceRow": 24
+    },
+    {
+     "id": "Tools-25",
+     "values": [
+      "TF-24",
+      "FreeCAD",
+      "OSS",
+      "github.com/FreeCAD/FreeCAD",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "-",
+      "LGPL-2.1"
+     ],
+     "sourceRow": 25
+    },
+    {
+     "id": "Tools-26",
+     "values": [
+      "TF-25",
+      "ezdxf",
+      "OSS",
+      "github.com/mozman/ezdxf",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "MIT"
+     ],
+     "sourceRow": 26
+    },
+    {
+     "id": "Tools-27",
+     "values": [
+      "TF-26",
+      "KiBot",
+      "OSS",
+      "github.com/INTI-CMNB/KiBot",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "AGPL-3.0"
+     ],
+     "sourceRow": 27
+    },
+    {
+     "id": "Tools-28",
+     "values": [
+      "TF-27",
+      "Strapi",
+      "OSS",
+      "github.com/strapi/strapi",
+      "DigiBull / OSS dependency",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Monthly re-pull",
+      "OSS repo",
+      "Repo Library",
+      "BuLLM Recommended",
+      "MIT (Community Edition)"
+     ],
+     "sourceRow": 28
+    },
+    {
+     "id": "Tools-29",
+     "values": [
+      "TF-28",
+      "mcp-builder",
+      "Skills",
+      "Skill Library (install cmd)",
+      "DigiBull / internal",
+      "High fit",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 29
+    },
+    {
+     "id": "Tools-30",
+     "values": [
+      "TF-29",
+      "pdf",
+      "Skills",
+      "github.com/anthropics/skills (pdf)",
+      "DigiBull / internal",
+      "High fit",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 30
+    },
+    {
+     "id": "Tools-31",
+     "values": [
+      "TF-30",
+      "xlsx",
+      "Skills",
+      "github.com/anthropics/skills (xlsx)",
+      "DigiBull / internal",
+      "Official",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 31
+    },
+    {
+     "id": "Tools-32",
+     "values": [
+      "TF-31",
+      "claude-office-skills",
+      "Skills",
+      "github.com/anthropics/skills",
+      "DigiBull / internal",
+      "Medium fit",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 32
+    },
+    {
+     "id": "Tools-33",
+     "values": [
+      "TF-32",
+      "frontend-design",
+      "Skills",
+      "Company skills registry",
+      "DigiBull / internal",
+      "862k installs",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 33
+    },
+    {
+     "id": "Tools-34",
+     "values": [
+      "TF-33",
+      "web-design-guidelines",
+      "Skills",
+      "Company skills registry",
+      "DigiBull / internal",
+      "613k installs",
+      "Snapshot 19-10-2026",
+      "Monthly re-pull",
+      "Skill",
+      "Skill Library",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 34
+    },
+    {
+     "id": "Tools-35",
+     "values": [
+      "TF-34",
+      "firecrawl",
+      "APIs",
+      "firecrawl/firecrawl",
+      "DigiBull / API key",
+      "Watch",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "API",
+      "Repo Library classics",
+      "-",
+      "AGPL-3.0"
+     ],
+     "sourceRow": 35
+    },
+    {
+     "id": "Tools-36",
+     "values": [
+      "TF-35",
+      "Exa",
+      "APIs",
+      "exa.ai",
+      "DigiBull / API key",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "API",
+      "Repo Library",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 36
+    },
+    {
+     "id": "Tools-37",
+     "values": [
+      "TF-36",
+      "PostHog",
+      "APIs",
+      "posthog.com",
+      "DigiBull / API key",
+      "In use",
+      "Snapshot 03-11-2026",
+      "Weekly scan",
+      "API",
+      "Tech Stack",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 37
+    },
+    {
+     "id": "Tools-38",
+     "values": [
+      "TF-37",
+      "OpenConnector",
+      "APIs",
+      "Vendor docs (OpenConnector)",
+      "DigiBull / API key",
+      "Planned",
+      "Snapshot 03-11-2026",
+      "Weekly scan",
+      "API",
+      "Tech Stack",
+      "-",
+      "Apache-2.0 (modified)"
+     ],
+     "sourceRow": 38
+    },
+    {
+     "id": "Tools-39",
+     "values": [
+      "TF-38",
+      "Refine.dev",
+      "Frameworks",
+      "refinedev/refine",
+      "DigiBull / OSS dependency",
+      "In use",
+      "v5.0.12",
+      "Monthly re-pull",
+      "Framework",
+      "Tech Stack",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 39
+    },
+    {
+     "id": "Tools-40",
+     "values": [
+      "TF-39",
+      "AG Grid",
+      "Frameworks",
+      "ag-grid.com",
+      "DigiBull / OSS dependency",
+      "In use",
+      "Snapshot 03-11-2026",
+      "Monthly re-pull",
+      "Framework",
+      "Tech Stack",
+      "-",
+      "MIT (Community)"
+     ],
+     "sourceRow": 40
+    },
+    {
+     "id": "Tools-41",
+     "values": [
+      "TF-40",
+      "FastAPI",
+      "Frameworks",
+      "github.com/fastapi/fastapi",
+      "DigiBull / OSS dependency",
+      "Adopted",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Framework",
+      "Repo Library classics",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 41
+    },
+    {
+     "id": "Tools-42",
+     "values": [
+      "TF-41",
+      "LangChain",
+      "Frameworks",
+      "github.com/langchain-ai/langchain",
+      "DigiBull / OSS dependency",
+      "Reference",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Framework",
+      "Repo Library classics",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 42
+    },
+    {
+     "id": "Tools-43",
+     "values": [
+      "TF-42",
+      "crewAI",
+      "Frameworks",
+      "github.com/crewAIInc/crewAI",
+      "DigiBull / OSS dependency",
+      "Watch",
+      "Snapshot 27-10-2026",
+      "Weekly scan",
+      "Framework",
+      "Repo Library classics",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 43
+    },
+    {
+     "id": "Tools-44",
+     "values": [
+      "TF-43",
+      "SAP OData (BTP)",
+      "Enterprise systems",
+      "Repo Library (ERP row)",
+      "DigiBull / enterprise admin",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "BuLLM Tested",
+      "Proprietary"
+     ],
+     "sourceRow": 44
+    },
+    {
+     "id": "Tools-45",
+     "values": [
+      "TF-44",
+      "SAP ABAP ADT",
+      "Enterprise systems",
+      "SAP BTP cockpit (ADT)",
+      "DigiBull / enterprise admin",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "BuLLM Tested",
+      "Proprietary"
+     ],
+     "sourceRow": 45
+    },
+    {
+     "id": "Tools-46",
+     "values": [
+      "TF-45",
+      "Salesforce (official, via CLI)",
+      "Enterprise systems",
+      "developer.salesforce.com",
+      "DigiBull / enterprise admin",
+      "Watch",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "BuLLM Tested",
+      "Proprietary"
+     ],
+     "sourceRow": 46
+    },
+    {
+     "id": "Tools-47",
+     "values": [
+      "TF-46",
+      "Stripe (official)",
+      "Enterprise systems",
+      "github.com/stripe/agent-toolkit",
+      "DigiBull / enterprise admin",
+      "Pilot",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "BuLLM Recommended",
+      "MIT"
+     ],
+     "sourceRow": 47
+    },
+    {
+     "id": "Tools-48",
+     "values": [
+      "TF-47",
+      "ClickUp",
+      "Enterprise systems",
+      "clickup.com/api",
+      "DigiBull / enterprise admin",
+      "Pilot, scan first",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "BuLLM Recommended",
+      "Proprietary"
+     ],
+     "sourceRow": 48
+    },
+    {
+     "id": "Tools-49",
+     "values": [
+      "TF-48",
+      "Zoho CRM/Books",
+      "Enterprise systems",
+      "Gap - generate per client",
+      "DigiBull / enterprise admin",
+      "Gap",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 49
+    },
+    {
+     "id": "Tools-50",
+     "values": [
+      "TF-49",
+      "Infor LN",
+      "Enterprise systems",
+      "Infor OS / ION API",
+      "DigiBull / enterprise admin",
+      "Gap",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 50
+    },
+    {
+     "id": "Tools-51",
+     "values": [
+      "TF-50",
+      "QuoteWin (Supplyframe)",
+      "Enterprise systems",
+      "supplyframe.com/quoting-solutions-for-ems",
+      "DigiBull / enterprise admin",
+      "Gap",
+      "Snapshot 24-10-2026",
+      "Weekly scan",
+      "Enterprise system",
+      "Repo Library",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 51
+    },
+    {
+     "id": "Tools-52",
+     "values": [
+      "TOOL-MKTG-01",
+      "WebMCP",
+      "MCP",
+      "developer.chrome.com/docs/ai/webmcp",
+      "DigiBull / self-hosted",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "W3C Software and Document License"
+     ],
+     "sourceRow": 52
+    },
+    {
+     "id": "Tools-53",
+     "values": [
+      "TOOL-MKTG-02",
+      "DataforSEO",
+      "API",
+      "docs.dataforseo.com/v3",
+      "DigiBull / API key",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 53
+    },
+    {
+     "id": "Tools-54",
+     "values": [
+      "TOOL-MKTG-03",
+      "OpenSEO",
+      "Open Source repos",
+      "github.com/every-app/open-seo",
+      "DigiBull / OSS dependency",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 54
+    },
+    {
+     "id": "Tools-55",
+     "values": [
+      "TOOL-MKTG-04",
+      "DigiBull Audit Tool",
+      "Internal tools",
+      "Vendor site (see Tool Name)",
+      "DigiBull / internal",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Internal tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 55
+    },
+    {
+     "id": "Tools-56",
+     "values": [
+      "TOOL-MKTG-05",
+      "Ahrefs",
+      "3rd party tools",
+      "ahrefs.com",
+      "DigiBull / subscription",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 56
+    },
+    {
+     "id": "Tools-57",
+     "values": [
+      "TOOL-MKTG-06",
+      "Git link",
+      "Scripts/Codebase",
+      "github.com/digibull-ai/seo-scripts",
+      "DigiBull / internal repo",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Script",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 57
+    },
+    {
+     "id": "Tools-58",
+     "values": [
+      "TOOL-MKTG-07",
+      "Rankmath, GMB Everywhere",
+      "Plugins/Extensions",
+      "rankmath.com; gmbeverywhere.com",
+      "DigiBull / license owner",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later (Rank Math); Proprietary (GMB Everywhere)"
+     ],
+     "sourceRow": 58
+    },
+    {
+     "id": "Tools-59",
+     "values": [
+      "TOOL-MKTG-08",
+      "GA4, Search Console, Google Tag Manager, Mixpanel",
+      "Analytical tools",
+      "developers.google.com/analytics; tagmanager.google.com; mixpanel.com",
+      "DigiBull / API key",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "Analytics",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 59
+    },
+    {
+     "id": "Tools-61",
+     "values": [
+      "TOOL-MKTG-161",
+      "Sandboxes (e.g. supervised test/release environments)",
+      "Sandboxes",
+      "Internal: staging environments",
+      "DigiBull / DevOps",
+      "Category recorded; configuration pending",
+      "Added 2026-10-25 per user; tool version unpinned",
+      "Monthly re-pull",
+      "Sandbox",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 61
+    },
+    {
+     "id": "Tools-62",
+     "values": [
+      "TOOL-MKTG-13",
+      "WordPress MCP Adapter (WordPress/mcp-adapter)",
+      "MCP",
+      "https://github.com/WordPress/mcp-adapter",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0"
+     ],
+     "sourceRow": 62
+    },
+    {
+     "id": "Tools-63",
+     "values": [
+      "TOOL-MKTG-14",
+      "Automattic mcp-wordpress-remote",
+      "MCP",
+      "https://github.com/automattic/mcp-wordpress-remote",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 63
+    },
+    {
+     "id": "Tools-64",
+     "values": [
+      "TOOL-MKTG-15",
+      "WordPress.com MCP Server",
+      "MCP",
+      "https://developer.wordpress.com/docs/mcp/",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 64
+    },
+    {
+     "id": "Tools-65",
+     "values": [
+      "TOOL-MKTG-17",
+      "ZipWP MCP",
+      "MCP",
+      "https://zipwp.com/docs/zipwp-mcp-with-ai-tools/",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 65
+    },
+    {
+     "id": "Tools-66",
+     "values": [
+      "TOOL-MKTG-20",
+      "Community Elementor MCP servers (examples in the cited WP control sheet).",
+      "MCP",
+      "https://github.com/NorseGaud/mcp-api-for-elementor",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 66
+    },
+    {
+     "id": "Tools-67",
+     "values": [
+      "TOOL-MKTG-29",
+      "Playwright MCP (microsoft/playwright-mcp)",
+      "MCP",
+      "https://github.com/microsoft/playwright-mcp",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 67
+    },
+    {
+     "id": "Tools-68",
+     "values": [
+      "TOOL-MKTG-30",
+      "Chrome DevTools MCP (ChromeDevTools/chrome-devtools-mcp)",
+      "MCP",
+      "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "DigiBull / self-hosted",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 68
+    },
+    {
+     "id": "Tools-69",
+     "values": [
+      "TOOL-MKTG-11",
+      "WordPress REST API (core)",
+      "API",
+      "https://developer.wordpress.org/rest-api/",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 69
+    },
+    {
+     "id": "Tools-70",
+     "values": [
+      "TOOL-MKTG-21",
+      "WPGraphQL",
+      "API",
+      "https://www.wpgraphql.com/",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 70
+    },
+    {
+     "id": "Tools-71",
+     "values": [
+      "TOOL-MKTG-22",
+      "Rank Math REST/meta endpoints",
+      "API",
+      "https://rankmath.com/kb/headless-cms-support/",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 71
+    },
+    {
+     "id": "Tools-72",
+     "values": [
+      "TOOL-MKTG-38",
+      "20i Reseller API",
+      "API",
+      "https://docs.20i.com/api/20i-api-documentation",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 72
+    },
+    {
+     "id": "Tools-73",
+     "values": [
+      "TOOL-MKTG-39",
+      "InstaWP API",
+      "API",
+      "https://instawp.com/features/api/",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 73
+    },
+    {
+     "id": "Tools-74",
+     "values": [
+      "TOOL-MKTG-46",
+      "Frase API / MCP",
+      "API",
+      "https://docs.frase.io/integrations/api-and-mcp",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 74
+    },
+    {
+     "id": "Tools-75",
+     "values": [
+      "TOOL-MKTG-16",
+      "WordPress Playground",
+      "Open Source repos",
+      "https://wordpress.org/playground/",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0"
+     ],
+     "sourceRow": 75
+    },
+    {
+     "id": "Tools-76",
+     "values": [
+      "TOOL-MKTG-26",
+      "Lighthouse CI",
+      "Open Source repos",
+      "https://github.com/GoogleChrome/lighthouse-ci",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 76
+    },
+    {
+     "id": "Tools-77",
+     "values": [
+      "TOOL-MKTG-28",
+      "Playwright",
+      "Open Source repos",
+      "https://playwright.dev/",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 77
+    },
+    {
+     "id": "Tools-78",
+     "values": [
+      "TOOL-MKTG-31",
+      "Puppeteer",
+      "Open Source repos",
+      "https://pptr.dev/",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 78
+    },
+    {
+     "id": "Tools-79",
+     "values": [
+      "TOOL-MKTG-32",
+      "Cypress",
+      "Open Source repos",
+      "https://www.cypress.io/",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 79
+    },
+    {
+     "id": "Tools-80",
+     "values": [
+      "TOOL-MKTG-33",
+      "wp-browser (lucatume/wp-browser, Codeception)",
+      "Open Source repos",
+      "https://github.com/lucatume/wp-browser",
+      "DigiBull / OSS dependency",
+      "[MAPPED from control sheet] Open source | No MCP; PHP test framework (verified repo)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 80
+    },
+    {
+     "id": "Tools-81",
+     "values": [
+      "TOOL-MKTG-34",
+      "wp-env (WordPress block editor team)",
+      "Open Source repos",
+      "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/",
+      "DigiBull / OSS dependency",
+      "[MAPPED from control sheet] Open source (GPL, WordPress project) | No MCP; CLI (verified)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 81
+    },
+    {
+     "id": "Tools-82",
+     "values": [
+      "TOOL-MKTG-35",
+      "browser-use (browser-use/browser-use)",
+      "Open Source repos",
+      "https://github.com/browser-use/browser-use",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 82
+    },
+    {
+     "id": "Tools-83",
+     "values": [
+      "TOOL-MKTG-36",
+      "Stagehand (Browserbase)",
+      "Open Source repos",
+      "https://github.com/browserbase/stagehand",
+      "DigiBull / OSS dependency",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 83
+    },
+    {
+     "id": "Tools-84",
+     "values": [
+      "TOOL-MKTG-04",
+      "DigiBull Audit Tool",
+      "Internal tools",
+      "Vendor site (see Tool Name)",
+      "DigiBull / internal",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Internal tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 84
+    },
+    {
+     "id": "Tools-85",
+     "values": [
+      "TOOL-MKTG-18",
+      "OttoKit (formerly SureTriggers)",
+      "3rd party tools",
+      "https://ottokit.com/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 85
+    },
+    {
+     "id": "Tools-86",
+     "values": [
+      "TOOL-MKTG-27",
+      "Screaming Frog SEO Spider",
+      "3rd party tools",
+      "https://www.screamingfrog.co.uk/seo-spider/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 86
+    },
+    {
+     "id": "Tools-87",
+     "values": [
+      "TOOL-MKTG-41",
+      "WP Migrate",
+      "3rd party tools",
+      "https://deliciousbrains.com/wp-migrate/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 87
+    },
+    {
+     "id": "Tools-88",
+     "values": [
+      "TOOL-MKTG-42",
+      "20i Staging tool (built-in)",
+      "3rd party tools",
+      "https://www.20i.com/wordpress-hosting",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 88
+    },
+    {
+     "id": "Tools-89",
+     "values": [
+      "TOOL-MKTG-43",
+      "MainWP Dashboard",
+      "3rd party tools",
+      "https://mainwp.com/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 89
+    },
+    {
+     "id": "Tools-90",
+     "values": [
+      "TOOL-MKTG-44",
+      "n8n",
+      "3rd party tools",
+      "https://n8n.io/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Sustainable Use License 1.0"
+     ],
+     "sourceRow": 90
+    },
+    {
+     "id": "Tools-91",
+     "values": [
+      "TOOL-MKTG-12",
+      "WP-CLI",
+      "Scripts/Codebase",
+      "https://wp-cli.org/",
+      "DigiBull / internal repo",
+      "[MAPPED from control sheet] Open source (MIT) | No MCP; scriptable CLI (verified)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Script",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 91
+    },
+    {
+     "id": "Tools-92",
+     "values": [
+      "TOOL-MKTG-19",
+      "Elementor CLI",
+      "Scripts/Codebase",
+      "https://developers.elementor.com/docs/cli/",
+      "DigiBull / internal repo",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Script",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 92
+    },
+    {
+     "id": "Tools-93",
+     "values": [
+      "TOOL-MKTG-40",
+      "WPvivid (backup/migration)",
+      "Plugins/Extensions",
+      "https://wordpress.org/plugins/wpvivid-backuprestore/",
+      "DigiBull / license owner",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 93
+    },
+    {
+     "id": "Tools-94",
+     "values": [
+      "TOOL-MKTG-45",
+      "WP Webhooks",
+      "Plugins/Extensions",
+      "https://wp-webhooks.com/",
+      "DigiBull / license owner",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 94
+    },
+    {
+     "id": "Tools-95",
+     "values": [
+      "TOOL-MKTG-47",
+      "Astra",
+      "Plugins/Extensions",
+      "wordpress.org/plugins (Astra theme)",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 95
+    },
+    {
+     "id": "Tools-96",
+     "values": [
+      "TOOL-MKTG-48",
+      "Astra Child Theme",
+      "Plugins/Extensions",
+      "Child theme in company repo",
+      "DigiBull",
+      "[MAPPED from control sheet] Theme | Free | Suggested: Recommended | Recommended with Astra",
+      "WordPress Automation - Master Control Sheet v1 (15 Oct 2026); version n/a; last verified -",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 96
+    },
+    {
+     "id": "Tools-97",
+     "values": [
+      "TOOL-MKTG-49",
+      "Generate Press Premium",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 97
+    },
+    {
+     "id": "Tools-98",
+     "values": [
+      "TOOL-MKTG-50",
+      "GP Premium child",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation - Master Control Sheet v1 (15 Oct 2026); version n/a; last verified -",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 98
+    },
+    {
+     "id": "Tools-99",
+     "values": [
+      "TOOL-MKTG-51",
+      "Elementor",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 99
+    },
+    {
+     "id": "Tools-100",
+     "values": [
+      "TOOL-MKTG-52",
+      "Elementor Pro",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 100
+    },
+    {
+     "id": "Tools-101",
+     "values": [
+      "TOOL-MKTG-53",
+      "Spectra",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Block Editor | ZipWp | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 101
+    },
+    {
+     "id": "Tools-102",
+     "values": [
+      "TOOL-MKTG-54",
+      "Gutenberg",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Block Editor | ZipWp | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 102
+    },
+    {
+     "id": "Tools-103",
+     "values": [
+      "TOOL-MKTG-55",
+      "Duplicator",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Duplicating | Free | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 103
+    },
+    {
+     "id": "Tools-104",
+     "values": [
+      "TOOL-MKTG-56",
+      "Rank Math SEO",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 104
+    },
+    {
+     "id": "Tools-105",
+     "values": [
+      "TOOL-MKTG-57",
+      "Rank Math SEO Premium",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet]  | Paid | Suggested:  | Premium tier of decided SEO plugin",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 105
+    },
+    {
+     "id": "Tools-106",
+     "values": [
+      "TOOL-MKTG-58",
+      "Yoast SEO",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 106
+    },
+    {
+     "id": "Tools-107",
+     "values": [
+      "TOOL-MKTG-59",
+      "All in one SEO",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 107
+    },
+    {
+     "id": "Tools-108",
+     "values": [
+      "TOOL-MKTG-60",
+      "Schema & Structured Data for WP & AMP",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Schema | Free | Suggested: Mandatory",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 108
+    },
+    {
+     "id": "Tools-109",
+     "values": [
+      "TOOL-MKTG-61",
+      "Contact Form 7",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Forms | Free | Suggested: Choose one forms solution",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 109
+    },
+    {
+     "id": "Tools-110",
+     "values": [
+      "TOOL-MKTG-62",
+      "WPForms",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Forms | Free | Suggested: Choose one forms solution",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 110
+    },
+    {
+     "id": "Tools-111",
+     "values": [
+      "TOOL-MKTG-63",
+      "Elementor Pro Forms",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Forms | Paid | Suggested: Optional / if licensed",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 111
+    },
+    {
+     "id": "Tools-112",
+     "values": [
+      "TOOL-MKTG-64",
+      "Wp Activity Log",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Security | Free | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 112
+    },
+    {
+     "id": "Tools-113",
+     "values": [
+      "TOOL-MKTG-65",
+      "Wordfence Security",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Security | Free | Suggested: Recommended",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 113
+    },
+    {
+     "id": "Tools-114",
+     "values": [
+      "TOOL-MKTG-66",
+      "WP-hide login",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Security | Free | Suggested: Secure Wordpress Login URL",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 114
+    },
+    {
+     "id": "Tools-115",
+     "values": [
+      "TOOL-MKTG-67",
+      "UpdraftPlus",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 115
+    },
+    {
+     "id": "Tools-116",
+     "values": [
+      "TOOL-MKTG-68",
+      "WP Rocket",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Performance | Paid | Suggested: Optional / based on hosting",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0"
+     ],
+     "sourceRow": 116
+    },
+    {
+     "id": "Tools-117",
+     "values": [
+      "TOOL-MKTG-69",
+      "Perfmatters",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Performance | Paid | Suggested: Optional / based on hosting",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 117
+    },
+    {
+     "id": "Tools-118",
+     "values": [
+      "TOOL-MKTG-70",
+      "Autooptimize",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Performance | Free | Suggested: Optional / based on hosting",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 118
+    },
+    {
+     "id": "Tools-119",
+     "values": [
+      "TOOL-MKTG-71",
+      "10 Web Booster",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Performance | Free | Suggested: Optional / based on hosting",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 119
+    },
+    {
+     "id": "Tools-120",
+     "values": [
+      "TOOL-MKTG-72",
+      "Redirection",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Redirects | Free | Suggested: As needed",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 120
+    },
+    {
+     "id": "Tools-121",
+     "values": [
+      "TOOL-MKTG-73",
+      "Site Kit by Google",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Analytics | Free | Suggested: Recommended if needed",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 121
+    },
+    {
+     "id": "Tools-122",
+     "values": [
+      "TOOL-MKTG-74",
+      "Akismet Anti-Spam",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Anti-spam | Free | Suggested: As needed",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 122
+    },
+    {
+     "id": "Tools-123",
+     "values": [
+      "TOOL-MKTG-75",
+      "WP Mail SMTP",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Email | Free | Suggested: As needed",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later"
+     ],
+     "sourceRow": 123
+    },
+    {
+     "id": "Tools-124",
+     "values": [
+      "TOOL-MKTG-76",
+      "WordPress Download Manager",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Downloads | Free | Suggested: Only if required",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 124
+    },
+    {
+     "id": "Tools-125",
+     "values": [
+      "TOOL-MKTG-77",
+      "Imagify",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Image Optimization | Free | Suggested: Recommended",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 125
+    },
+    {
+     "id": "Tools-126",
+     "values": [
+      "TOOL-MKTG-78",
+      "Optimole",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Image Optimization | Free | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 126
+    },
+    {
+     "id": "Tools-127",
+     "values": [
+      "TOOL-MKTG-79",
+      "EWWW Image Optimizer",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Image Optimization | Free | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0"
+     ],
+     "sourceRow": 127
+    },
+    {
+     "id": "Tools-128",
+     "values": [
+      "TOOL-MKTG-80",
+      "Smush",
+      "Plugins/Extensions",
+      "wordpress.org/plugins",
+      "DigiBull",
+      "[MAPPED from control sheet] Image Optimization | Free | Suggested: Optional",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0"
+     ],
+     "sourceRow": 128
+    },
+    {
+     "id": "Tools-129",
+     "values": [
+      "TOOL-MKTG-23",
+      "Google Search Console API",
+      "Analytical tools",
+      "https://developers.google.com/webmaster-tools",
+      "DigiBull / API key",
+      "[MAPPED from control sheet] Free (Google) | REST API (verified official docs)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "Analytics",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 129
+    },
+    {
+     "id": "Tools-130",
+     "values": [
+      "TOOL-MKTG-24",
+      "PageSpeed Insights API",
+      "Analytical tools",
+      "https://developers.google.com/speed/docs/insights/rest",
+      "DigiBull / API key",
+      "[MAPPED from control sheet] Free (Google, API key) | REST API (verified official docs)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "Analytics",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 130
+    },
+    {
+     "id": "Tools-131",
+     "values": [
+      "TOOL-MKTG-25",
+      "Google Analytics (GA4) Data API",
+      "Analytical tools",
+      "https://developers.google.com/analytics/devguides/reporting/data/v1",
+      "DigiBull / API key",
+      "[MAPPED from control sheet] Free (Google) | REST API (verified)",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Weekly scan",
+      "Analytics",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 131
+    },
+    {
+     "id": "Tools-132",
+     "values": [
+      "TOOL-MKTG-08",
+      "Mixpanel, Google Tag Manager",
+      "Analytical tools",
+      "developers.google.com/analytics; tagmanager.google.com; mixpanel.com",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "Analytics",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 132
+    },
+    {
+     "id": "Tools-170",
+     "values": [
+      "TOOL-MKTG-37",
+      "WebMCP (Chrome proposal)",
+      "Unclassified (not MCP)",
+      "https://developer.chrome.com/docs/ai/webmcp",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "WordPress Automation control sheet v1 (15 Oct 2026); details condensed.",
+      "Monthly re-pull",
+      "Tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "W3C Software and Document License"
+     ],
+     "sourceRow": 170
+    },
+    {
+     "id": "Tools-171",
+     "values": [
+      "TOOL-MKTG-116",
+      "DataForSEO",
+      "API",
+      "https://dataforseo.com/apis",
+      "DigiBull / API key",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 171
+    },
+    {
+     "id": "Tools-172",
+     "values": [
+      "TOOL-MKTG-117",
+      "Ahrefs",
+      "3rd party tools",
+      "https://ahrefs.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 172
+    },
+    {
+     "id": "Tools-173",
+     "values": [
+      "TOOL-MKTG-118",
+      "LinkedIn",
+      "3rd party tools",
+      "https://www.linkedin.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 173
+    },
+    {
+     "id": "Tools-174",
+     "values": [
+      "TOOL-MKTG-119",
+      "NotebookLM",
+      "3rd party tools",
+      "https://notebooklm.google",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 174
+    },
+    {
+     "id": "Tools-175",
+     "values": [
+      "TOOL-MKTG-120",
+      "Metricool",
+      "3rd party tools",
+      "https://metricool.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 175
+    },
+    {
+     "id": "Tools-176",
+     "values": [
+      "TOOL-MKTG-121",
+      "Google Ads",
+      "3rd party tools",
+      "https://support.google.com/google-ads",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 176
+    },
+    {
+     "id": "Tools-177",
+     "values": [
+      "TOOL-MKTG-122",
+      "WordPress",
+      "3rd party tools",
+      "https://wordpress.org",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-2.0-or-later"
+     ],
+     "sourceRow": 177
+    },
+    {
+     "id": "Tools-178",
+     "values": [
+      "TOOL-MKTG-123",
+      "GTmetrix",
+      "3rd party tools",
+      "https://gtmetrix.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 178
+    },
+    {
+     "id": "Tools-179",
+     "values": [
+      "TOOL-MKTG-124",
+      "SiteSpeedBot",
+      "3rd party tools",
+      "https://sitespeedbot.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 179
+    },
+    {
+     "id": "Tools-180",
+     "values": [
+      "TOOL-MKTG-125",
+      "Responsively App",
+      "3rd party tools",
+      "https://responsively.app",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "AGPL-3.0"
+     ],
+     "sourceRow": 180
+    },
+    {
+     "id": "Tools-181",
+     "values": [
+      "TOOL-MKTG-126",
+      "SSL Labs",
+      "3rd party tools",
+      "https://www.ssllabs.com/ssltest/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 181
+    },
+    {
+     "id": "Tools-182",
+     "values": [
+      "TOOL-MKTG-127",
+      "SecurityHeaders.com",
+      "3rd party tools",
+      "https://securityheaders.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 182
+    },
+    {
+     "id": "Tools-183",
+     "values": [
+      "TOOL-MKTG-128",
+      "Lighthouse",
+      "3rd party tools",
+      "https://developer.chrome.com/docs/lighthouse/overview",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Apache-2.0"
+     ],
+     "sourceRow": 183
+    },
+    {
+     "id": "Tools-184",
+     "values": [
+      "TOOL-MKTG-129",
+      "Dr. Link Check",
+      "3rd party tools",
+      "https://www.drlinkcheck.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 184
+    },
+    {
+     "id": "Tools-185",
+     "values": [
+      "TOOL-MKTG-130",
+      "httpstatus.io",
+      "3rd party tools",
+      "https://httpstatus.io",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 185
+    },
+    {
+     "id": "Tools-186",
+     "values": [
+      "TOOL-MKTG-131",
+      "Google Rich Results Test",
+      "3rd party tools",
+      "https://search.google.com/test/rich-results",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 186
+    },
+    {
+     "id": "Tools-187",
+     "values": [
+      "TOOL-MKTG-132",
+      "Schema.org Validator",
+      "3rd party tools",
+      "https://validator.schema.org",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 187
+    },
+    {
+     "id": "Tools-188",
+     "values": [
+      "TOOL-MKTG-133",
+      "ChatGPT / Claude",
+      "3rd party tools",
+      "https://chatgpt.com ; https://claude.ai",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 188
+    },
+    {
+     "id": "Tools-189",
+     "values": [
+      "TOOL-MKTG-134",
+      "Google Business Profile",
+      "3rd party tools",
+      "https://www.google.com/business/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 189
+    },
+    {
+     "id": "Tools-190",
+     "values": [
+      "TOOL-MKTG-135",
+      "SE Ranking Website Audit",
+      "3rd party tools",
+      "https://seranking.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 190
+    },
+    {
+     "id": "Tools-191",
+     "values": [
+      "TOOL-MKTG-136",
+      "Pictory",
+      "3rd party tools",
+      "https://pictory.ai",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 191
+    },
+    {
+     "id": "Tools-192",
+     "values": [
+      "TOOL-MKTG-137",
+      "Canva",
+      "3rd party tools",
+      "https://www.canva.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 192
+    },
+    {
+     "id": "Tools-193",
+     "values": [
+      "TOOL-MKTG-138",
+      "ElevenLabs / Pictory Voice AI",
+      "3rd party tools",
+      "https://elevenlabs.io ; https://pictory.ai",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 193
+    },
+    {
+     "id": "Tools-194",
+     "values": [
+      "TOOL-MKTG-139",
+      "YouTube Studio",
+      "3rd party tools",
+      "https://studio.youtube.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 194
+    },
+    {
+     "id": "Tools-195",
+     "values": [
+      "TOOL-MKTG-140",
+      "ChatGPT / DALL-E",
+      "3rd party tools",
+      "https://openai.com/index/dall-e-3/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 195
+    },
+    {
+     "id": "Tools-196",
+     "values": [
+      "TOOL-MKTG-141",
+      "Meta Ads",
+      "3rd party tools",
+      "facebook.com/business/ads-manager",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 196
+    },
+    {
+     "id": "Tools-197",
+     "values": [
+      "TOOL-MKTG-142",
+      "Facebook",
+      "3rd party tools",
+      "https://about.meta.com/technologies/facebook-app/",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 197
+    },
+    {
+     "id": "Tools-198",
+     "values": [
+      "TOOL-MKTG-143",
+      "Instagram",
+      "3rd party tools",
+      "instagram.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 198
+    },
+    {
+     "id": "Tools-199",
+     "values": [
+      "TOOL-MKTG-144",
+      "YouTube",
+      "3rd party tools",
+      "https://www.youtube.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 199
+    },
+    {
+     "id": "Tools-200",
+     "values": [
+      "TOOL-MKTG-145",
+      "WhatsApp",
+      "3rd party tools",
+      "https://www.whatsapp.com",
+      "DigiBull / subscription",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 200
+    },
+    {
+     "id": "Tools-201",
+     "values": [
+      "TOOL-MKTG-146",
+      "GMB Everywhere",
+      "Plugins/Extensions",
+      "https://gmbeverywhere.com",
+      "DigiBull / license owner",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "BuLLMaps Workflow v0.1 > Tooling tab (checked 23 Oct 2026); tool version unpinned",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 201
+    },
+    {
+     "id": "Tools-216",
+     "values": [
+      "TOOL-MKTG-161",
+      "Sandboxes (supervised test/release environments)",
+      "Sandboxes",
+      "Internal: staging environments",
+      "DigiBull / DevOps",
+      "Mapped from the WordPress control sheet; see source row for details.",
+      "Added 2026-10-25 per user; tool version unpinned",
+      "Monthly re-pull",
+      "Sandbox",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 216
+    },
+    {
+     "id": "Tools-217",
+     "values": [
+      "TOOL-MFG-01",
+      "WebMCP",
+      "MCP",
+      "developer.chrome.com/docs/ai/webmcp",
+      "DigiBull / self-hosted",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "MCP",
+      "Common Masters 26-10-2026",
+      "-",
+      "W3C Software and Document License"
+     ],
+     "sourceRow": 217
+    },
+    {
+     "id": "Tools-218",
+     "values": [
+      "TOOL-MFG-02",
+      "DataforSEO",
+      "API",
+      "docs.dataforseo.com/v3",
+      "DigiBull / API key",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Weekly scan",
+      "API",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 218
+    },
+    {
+     "id": "Tools-219",
+     "values": [
+      "TOOL-MFG-03",
+      "OpenSEO",
+      "Open Source repos",
+      "github.com/every-app/open-seo",
+      "DigiBull / OSS dependency",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Open source",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT"
+     ],
+     "sourceRow": 219
+    },
+    {
+     "id": "Tools-220",
+     "values": [
+      "TOOL-MFG-04",
+      "DigiBull Audit Tool",
+      "Internal tools",
+      "Vendor site (see Tool Name)",
+      "DigiBull / internal",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Internal tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 220
+    },
+    {
+     "id": "Tools-221",
+     "values": [
+      "TOOL-MFG-05",
+      "Ahrefs",
+      "3rd party tools",
+      "ahrefs.com",
+      "DigiBull / subscription",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "External tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 221
+    },
+    {
+     "id": "Tools-222",
+     "values": [
+      "TOOL-MFG-06",
+      "Git link",
+      "Scripts/Codebase",
+      "github.com/digibull-ai/seo-scripts",
+      "DigiBull / internal repo",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Script",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 222
+    },
+    {
+     "id": "Tools-223",
+     "values": [
+      "TOOL-MFG-07",
+      "Rankmath, GMB Everywhere",
+      "Plugins/Extensions",
+      "rankmath.com; gmbeverywhere.com",
+      "DigiBull / license owner",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Plugin",
+      "Common Masters 26-10-2026",
+      "-",
+      "GPL-3.0-or-later (Rank Math); Proprietary (GMB Everywhere)"
+     ],
+     "sourceRow": 223
+    },
+    {
+     "id": "Tools-224",
+     "values": [
+      "TOOL-MFG-08",
+      "GA4, Search Console, Google Tag Manager, Mixpanel",
+      "Analytics tools",
+      "developers.google.com/analytics; tagmanager.google.com; mixpanel.com",
+      "DigiBull / subscription",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary"
+     ],
+     "sourceRow": 224
+    },
+    {
+     "id": "Tools-225",
+     "values": [
+      "TOOL-MFG-09",
+      "Storm - https://storm.genie.stanford.edu/, NotebookLM",
+      "Research",
+      "https://storm.genie.stanford.edu/",
+      "DigiBull / subscription",
+      "Category recorded; configuration pending",
+      "Registry v0.1 / 2026-10-08; tool version unpinned",
+      "Monthly re-pull",
+      "Tool",
+      "Common Masters 26-10-2026",
+      "-",
+      "MIT (Storm); Proprietary (NotebookLM)"
+     ],
+     "sourceRow": 225
+    },
+    {
+     "id": "Tools-228",
+     "values": [
+      "TOOL-MFG-12",
+      "Sandboxes (supervised test/release environments)",
+      "Sandboxes",
+      "Internal: staging environments",
+      "DigiBull / DevOps",
+      "Category recorded; configuration pending",
+      "Added 2026-10-25 per user; tool version unpinned",
+      "Monthly re-pull",
+      "Sandbox",
+      "Common Masters 26-10-2026",
+      "-",
+      "Proprietary (internal)"
+     ],
+     "sourceRow": 228
+    }
+   ],
+   "removedRows": [],
+   "notes": [],
+   "readOnly": false
+  }
+ ]
+}
