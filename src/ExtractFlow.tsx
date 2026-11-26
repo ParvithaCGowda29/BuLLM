@@ -1,9 +1,4 @@
 import {useEffect,useRef,useState} from 'react';
-import Uppy from '@uppy/core';
-import Dashboard from '@uppy/react/dashboard';
-import '@uppy/core/css/style.min.css';
-import '@uppy/dashboard/css/style.min.css';
-import {IconFolder,IconUpload,IconArchive} from './icons';
 import {loadOnyxConfig,uploadToOnyx,type OnyxConfig} from './onyx';
 import {unzipSync} from 'fflate';
 import {autoMap,detectHeader,importDataRows,mappedRows,readImportFile,sheetKey,templateInRows,type ImportSheet,type MasterTarget} from './bulkImport';
@@ -11,15 +6,14 @@ import {newId} from './id';
 import bullMark from './assets/login/bull-logo.png';
 
 export type ExtractScope={type:'all'}|{type:'tab';tab:string};
-type Props={dark:boolean;scope:ExtractScope;masters:MasterTarget[];onClose:()=>void;onImport:(entries:{master:string;values:string[][];files?:string[]}[])=>Promise<void>};
+type Props={scope:ExtractScope;masters:MasterTarget[];initialFiles:File[];onClose:()=>void;onImport:(entries:{master:string;values:string[][];files?:string[]}[])=>Promise<void>};
 
-type Step='source'|'permission'|'find'|'review';
-const STEPS:{key:Step;label:string}[]=[{key:'source',label:'Source'},{key:'permission',label:'Permission'},{key:'find',label:'Fetch files'},{key:'review',label:'Mapping'}];
+type Step='permission'|'find'|'review';
+const STEPS:{key:Step;label:string}[]=[{key:'permission',label:'Permission'},{key:'find',label:'Fetch files'},{key:'review',label:'Mapping'}];
 // At or above this header-match percent a fully resolved table starts ticked. A high
 // percentage alone never ticks a table: every source column with content must be
 // mapped or explicitly ignored, and the master's ID column must be mapped.
 const MATCH_OK=60;
-const ACCEPT=['.xlsx','.csv','.zip','.pdf','.dxf','.dwg','.step','.stp','.docx','.md','.txt','.eml','.msg'];
 
 // Intake takes any project document. Only tabular master data (.xlsx/.csv) is read and
 // mapped; drawings, SOPs and client emails are listed so the set of project documents
@@ -41,12 +35,9 @@ type FindProgress={done:number;total:number;current:string;found:number};
 const isCsv=(name:string)=>/\.csv$/i.test(name);
 const extOk=(name:string,types:{xlsx:boolean;csv:boolean})=>isCsv(name)?types.csv:/\.xlsx$/i.test(name)?types.xlsx:false;
 
-export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
- const fileInput=useRef<HTMLInputElement>(null);
- const folderInput=useRef<HTMLInputElement>(null);
- const zipInput=useRef<HTMLInputElement>(null);
+export function ExtractFlow({scope,masters,initialFiles,onClose,onImport}:Props){
  const stopRef=useRef(false);
- const[step,setStep]=useState<Step>('source');
+ const[step,setStep]=useState<Step>('permission');
  const[files,setFiles]=useState<Picked[]>([]);
  const[types,setTypes]=useState({xlsx:true,csv:true});
  const[access,setAccess]=useState<Access>('write');
@@ -54,23 +45,8 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
  const[plans,setPlans]=useState<TablePlan[]>([]);
  const[failed,setFailed]=useState<string[]>([]);
  const[progress,setProgress]=useState<FindProgress>({done:0,total:0,current:'',found:0});
- const[uppyCount,setUppyCount]=useState(0);
- // The Uppy dashboard is the intake preview for all three options (folder, bulk, zip). It
- // never uploads anywhere: Continue reads its file list and hands the File objects to the
- // same processing the typed inputs used before (zip expansion, type classification).
- const[uppy]=useState(()=>new Uppy({autoProceed:false,restrictions:{maxNumberOfFiles:null,allowedFileTypes:ACCEPT}}));
- useEffect(()=>{
-  const update=()=>setUppyCount(uppy.getFiles().length);
-  uppy.on('file-added',update);uppy.on('file-removed',update);
-  // No uppy.destroy() here: StrictMode's setup/cleanup/setup cycle would kill the instance the
-  // second setup still uses. The dialog is short-lived; Dashboard uninstalls its plugin on unmount.
-  return()=>{uppy.off('file-added',update);uppy.off('file-removed',update);};
- },[uppy]);
- // Which upload option's drop/browse popup is open. The Source step itself shows no
- // dropzone: clicking an option opens the dashboard in a centered popup instead.
- const[dropOpen,setDropOpen]=useState<''|'folder'|'bulk'|'zip'>('');
- // The zip option narrows the accepted types to .zip while its popup is open.
- useEffect(()=>{uppy.setOptions({restrictions:{maxNumberOfFiles:null,allowedFileTypes:dropOpen==='zip'?['.zip']:ACCEPT}});},[dropOpen,uppy]);
+ // Files come in from the Add files menu (BAM-style picker) and are seeded once here.
+ useEffect(()=>{void addFiles(initialFiles);},[]);
  const[busy,setBusy]=useState(false);
  const[error,setError]=useState('');
  // Onyx: when connected, the picked files are also sent to the Onyx server to read and
@@ -167,17 +143,6 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
   setFiles(next);
   return next.length;
  }
- // Folder, bulk and zip inputs all feed the dashboard preview; duplicates are Uppy's call.
- function addToDashboard(list:FileList|null){
-  if(!list)return;
-  for(const file of [...list]){try{uppy.addFile({name:file.name,type:file.type,data:file});}catch{}}
- }
- async function continueFromSource(){
-  setDropOpen('');
-  const picked=uppy.getFiles().map(f=>new File([f.data as Blob],f.name,{type:f.type||undefined}));
-  const added=await addFiles(picked);
-  if(added>0)setStep('permission');
- }
  async function runFind(){
   stopRef.current=false;
   setStep('find');
@@ -228,8 +193,8 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
    onClose();
   }catch(err){setError(err instanceof Error?err.message:String(err));setBusy(false);}
  }
- const titles:Record<Step,string>={source:'Add files',permission:'Allow read-write access to your files',find:'Fetching tables',review:'Review where each file maps'};
- return <><dialog ref={el=>{if(el&&!el.open)el.showModal();}} className="bulk-dialog ex-dialog" aria-labelledby="ex-title" onCancel={e=>{e.preventDefault();if(dropOpen){setDropOpen('');return;}if(!busy)onClose();}}>
+ const titles:Record<Step,string>={permission:'Allow read-write access to your files',find:'Fetching tables',review:'Review where each file maps'};
+ return <><dialog ref={el=>{if(el&&!el.open)el.showModal();}} className="bulk-dialog ex-dialog" aria-labelledby="ex-title" onCancel={e=>{e.preventDefault();if(!busy)onClose();}}>
   <div className="bulk-heading">
    <div>
     <h2 id="ex-title">{titles[step]}</h2>
@@ -245,33 +210,6 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
    <button aria-label="Close add files" disabled={busy} onClick={onClose}>×</button>
   </div>
   <div className="bulk-body">
-   {step==='source'&&<>
-    <p className="ex-label">UPLOAD PROJECT DOCUMENTS</p>
-    <div className="ex-options" role="group" aria-label="Upload options">
-     <button type="button" className="ex-option" onClick={()=>setDropOpen('folder')}>
-      <span className="ex-option-num" aria-hidden="true">1</span>
-      <IconFolder size={17}/>
-      <strong>Choose folder</strong>
-      <small>Every project document in the folder you pick</small>
-     </button>
-     <button type="button" className="ex-option" onClick={()=>setDropOpen('bulk')}>
-      <span className="ex-option-num" aria-hidden="true">2</span>
-      <IconUpload size={17}/>
-      <strong>Bulk upload</strong>
-      <small>Pick several files at once</small>
-     </button>
-     <button type="button" className="ex-option" onClick={()=>setDropOpen('zip')}>
-      <span className="ex-option-num" aria-hidden="true">3</span>
-      <IconArchive size={17}/>
-      <strong>Zip upload</strong>
-      <small>One .zip of project documents</small>
-     </button>
-    </div>
-    <input ref={fileInput} type="file" hidden multiple accept=".xlsx,.csv,.pdf,.dxf,.dwg,.step,.stp,.docx,.md,.txt,.eml,.msg" aria-label="Choose files from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
-    <input ref={zipInput} type="file" hidden accept=".zip" aria-label="Choose a zip file from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
-    <input ref={folderInput} type="file" hidden multiple {...({webkitdirectory:'',directory:''} as object)} aria-label="Choose a folder from this device" onChange={e=>{addToDashboard(e.target.files);e.target.value='';}}/>
-    {pickError&&<p role="alert" className="bulk-error">{pickError}</p>}
-   </>}
    {step==='permission'&&<>
     {pickError&&<p role="alert" className="bulk-error">{pickError}</p>}
     <p className="ex-label">ACCESS LEVEL</p>
@@ -359,19 +297,14 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
    </>}
   </div>
   <div className="bulk-footer">
-   {step==='source'&&<>
-    <span>{uppyCount?`${uppyCount} file${uppyCount===1?'':'s'} ready`:'Pick files, a folder or a zip to continue'}</span>
-    <button onClick={onClose}>Cancel</button>
-    <button className="primary" disabled={!uppyCount} onClick={()=>void continueFromSource()}>Continue</button>
-   </>}
    {step==='permission'&&<>
     <span>{selected.length} of {files.filter(p=>p.kind==='table').length} tabular file{files.filter(p=>p.kind==='table').length===1?'':'s'} selected</span>
-    <button onClick={()=>setStep('source')}>Back</button>
+    <button onClick={onClose}>Cancel</button>
     <button className="primary" disabled={!selected.length} onClick={()=>void runFind()}>Allow read-write & fetch files</button>
    </>}
    {step==='find'&&<>
     <span>Read-write. This extraction job only.</span>
-    <button onClick={()=>{stopRef.current=true;setStep('source');}}>Stop extraction</button>
+    <button onClick={()=>{stopRef.current=true;setStep('permission');}}>Stop extraction</button>
    </>}
    {step==='review'&&<>
     <span>Nothing is imported until you confirm</span>
@@ -380,31 +313,6 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
     <button className="primary" disabled={busy||!readyCount} onClick={()=>void confirmImport()}>Import {readyCount||''} ready table{readyCount===1?'':'s'}</button>
    </>}
   </div>
-  {dropOpen&&<div className="ex-drop-popup" onClick={()=>setDropOpen('')}>
-   <div className="ex-drop-panel" role="dialog" aria-label={dropOpen==='folder'?'Choose folder':dropOpen==='zip'?'Zip upload':'Bulk upload'} onClick={e=>e.stopPropagation()}>
-    <div className="ex-drop-head">
-     <h3>{dropOpen==='folder'?'Choose folder':dropOpen==='zip'?'Zip upload':'Bulk upload'}</h3>
-     <button type="button" aria-label="Close file picker" onClick={()=>setDropOpen('')}>×</button>
-    </div>
-    <div onClickCapture={e=>{
-     // Browse uses the same per-option pickers as before: folder tree, many files, or one zip.
-     if(!(e.target as HTMLElement).closest('.uppy-Dashboard-browse'))return;
-     e.preventDefault();e.stopPropagation();
-     (dropOpen==='folder'?folderInput:dropOpen==='zip'?zipInput:fileInput).current?.click();
-    }}>
-     <Dashboard uppy={uppy} width="100%" height={280} proudlyDisplayPoweredByUppy={false} hideUploadButton theme={dark?'dark':'light'}/>
-    </div>
-    <span className="ex-chips" aria-label="Accepted document types">
-     <span className="ex-chip">Master data <b>.xlsx .csv</b></span>
-     <span className="ex-chip">Drawings <b>.pdf .dxf .dwg .step</b></span>
-     <span className="ex-chip">SOPs <b>.pdf .docx .md .txt</b></span>
-     <span className="ex-chip">Client emails <b>.eml .msg</b></span>
-    </span>
-    <div className="ex-drop-actions">
-     <button type="button" className="primary" disabled={!uppyCount} onClick={()=>setDropOpen('')}>Done ({uppyCount} file{uppyCount===1?'':'s'})</button>
-    </div>
-   </div>
-  </div>}
  </dialog>
  </>;
 }
