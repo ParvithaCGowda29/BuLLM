@@ -12,7 +12,7 @@ import {newId} from './id';
 import bullMark from './assets/login/bull-logo.png';
 
 export type ExtractScope={type:'all'}|{type:'tab';tab:string};
-type Props={dark:boolean;scope:ExtractScope;masters:MasterTarget[];onClose:()=>void;onImport:(entries:{master:string;values:string[][]}[])=>Promise<void>};
+type Props={dark:boolean;scope:ExtractScope;masters:MasterTarget[];onClose:()=>void;onImport:(entries:{master:string;values:string[][];files?:string[]}[])=>Promise<void>};
 
 type Step='source'|'permission'|'find'|'review';
 const STEPS:{key:Step;label:string}[]=[{key:'source',label:'Source'},{key:'permission',label:'Permission'},{key:'find',label:'Fetch files'},{key:'review',label:'Mapping'}];
@@ -220,11 +220,13 @@ export function ExtractFlow({dark,scope,masters,onClose,onImport}:Props){
   setBusy(true);setError('');
   try{
    const byMaster=new Map<string,string[][]>();
+   const filesByMaster=new Map<string,string[]>();
    for(const p of ready){
     const rows=mappedRows(p.rows,p.headerRow,p.mapping,headersOf(p.master).length);
     byMaster.set(p.master,[...(byMaster.get(p.master)||[]),...rows]);
+    filesByMaster.set(p.master,[...new Set([...(filesByMaster.get(p.master)||[]),p.file])]);
    }
-   await onImport([...byMaster].filter(([,values])=>values.length).map(([master,values])=>({master,values})));
+   await onImport([...byMaster].filter(([,values])=>values.length).map(([master,values])=>({master,values,files:filesByMaster.get(master)||[]})));
    onClose();
   }catch(err){setError(err instanceof Error?err.message:String(err));setBusy(false);}
  }
